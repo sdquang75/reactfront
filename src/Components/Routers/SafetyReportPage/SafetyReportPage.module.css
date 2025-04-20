@@ -1,0 +1,156 @@
+/* --- Mobile --- */
+.page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Đảm bảo chiều cao tối thiểu */
+
+    background-color: #f8f9fa;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between; /* Đẩy title sang trái, button sang phải */
+    align-items: center; /* Căn giữa các item theo chiều dọc */
+    padding: 0.8rem 1rem; /* Padding trên dưới ít hơn, ngang giữ nguyên */
+    /* Cân nhắc padding-top/bottom với safe-area-inset nếu cần độ chính xác cao */
+    /* padding-top: calc(0.8rem + env(safe-area-inset-top)); */
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    flex-shrink: 0; /* Không co header */
+    position: sticky; /* Giữ header cố định khi cuộn nếu cần */
+    top: 0;
+    z-index: 10; /* Đảm bảo header nổi lên trên */
+  }
+  
+  .headerTitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+    color: #333;
+  }
+  
+  .logoutButton {
+    background: none;
+    border: none;
+    color: #000000; /* Màu xanh dương cho link/button */
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.3rem 0.5rem; /* Thêm chút padding để dễ nhấn */
+    text-decoration: none; /* Bỏ gạch chân nếu là button */
+  }
+  
+  /* Thêm style cho icon nếu bạn dùng thư viện icon */
+  /* .logoutButton svg { margin-right: 0.3rem; } */
+  
+  .logoutButton:hover {
+    color: #000000;
+    text-decoration: underline; /* Thêm gạch chân khi hover */
+  }
+  
+  .mainContent {
+    flex-grow: 1; /* Chiếm hết không gian còn lại */
+    display: flex;
+    justify-content: center; /* Căn giữa form container */
+    align-items: flex-start; /* Căn giữa form container */
+    padding: 1.5rem 1rem; /* Tăng padding trên dưới cho nội dung */
+  }
+  
+  .formContainer {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 420px; /* Giới hạn chiều rộng tối đa hợp lý cho mobile */
+    box-sizing: border-box;
+  }
+  
+  .title {
+    font-size: 1.7rem;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+  
+  .subtitle {
+    font-size: 0.9rem;
+    color: #6c757d;
+    text-align: center;
+    margin-bottom: 2rem; /* Tăng khoảng cách dưới subtitle */
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .radioGroup {
+    border: none; /* Bỏ viền mặc định của fieldset */
+    padding: 0;
+    margin: 0 0 1.8rem 0; /* Tăng khoảng cách giữa các group */
+  }
+  
+  .radioGroup:last-of-type {
+      margin-bottom: 2rem; /* Tăng khoảng cách dưới group cuối */
+  }
+  
+  .groupLabel {
+    font-size: 1rem; /* Tăng nhẹ font size label group */
+    font-weight: 600;
+    margin-bottom: 1rem; /* Tăng khoảng cách dưới label group */
+    color: #495057;
+    padding: 0; /* Reset padding của legend */
+  }
+  
+  .radioOptionsContainer {
+    display: flex;
+  
+    gap: 0.8rem 1.5rem; /* Khoảng cách dọc và ngang giữa các options */
+  }
+  
+  .radioOption {
+    display: flex;
+    align-items: center; /* Căn radio và label thẳng hàng */
+    cursor: pointer; /* Biến con trỏ thành bàn tay  */
+  }
+  
+  .radioInput {
+    margin-right: 0.5rem; /* Khoảng cách giữa radio button và text label */
+    width: 1.1em; /* Tăng nhẹ kích thước radio button */
+    height: 1.1em;
+    cursor: pointer;
+    accent-color: #000000; /* Đổi màu của dấu tích radio button */
+  }
+  
+  .radioLabel {
+    cursor: pointer;
+  }
+  
+  /* Làm cho vùng chạm lớn hơn bao gồm cả label */
+  .radioOption input[type="radio"] + label {
+    position: relative;
+    padding-left: 2px; /* Tạo khoảng trống giua radio va` noi dung */
+  }
+  
+  .submitButton {
+    width: 100%;
+    padding: 0.9rem 1rem; /* Tăng padding cho button */
+    background-color: #212529;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px; /* Bo góc nhẹ */
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem; /* Khoảng cách từ group cuối tới button */
+    transition: background-color 0.15s ease-in-out;
+  }
+  
+  .submitButton:hover {
+    background-color: #343a40;
+  }
+  
+/* --- PC --- */

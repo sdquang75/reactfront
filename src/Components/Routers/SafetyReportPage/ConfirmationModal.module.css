@@ -1,0 +1,165 @@
+/* --- Mobile --- */
+.overlay {
+    position: fixed;
+    /* Che phủ toàn bộ viewport */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    /* Màu đen mờ */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* Đảm bảo nổi lên trên cùng */
+    padding: 1rem;
+    /* Đệm để modal không chạm sát viền màn hình */
+    box-sizing: border-box;
+}
+
+.modalBox {
+    background: white;
+    padding: 2rem 2.5rem 2rem 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    max-width: 450px;
+    /* Giới hạn chiều rộng */
+    width: 100%;
+    /* Chiếm phần lớn chiều rộng trên mobile */
+    position: relative;
+    /* Để định vị nút đóng */
+    text-align: center;
+    /* Căn giữa text mặc định */
+    box-sizing: border-box;
+    animation: fadeIn 0.2s ease-out;
+    /* Hiệu ứng xuất hiện đơn giản */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.closeButton {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: #aaa;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.2rem;
+}
+
+.closeButton:hover {
+    color: #333;
+}
+
+.title {
+    font-size: 1.5rem;
+    /* Điều chỉnh kích thước */
+    font-weight: 600;
+    margin-top: 0.25rem;
+    /* Thêm khoảng cách trên nếu cần */
+    margin-bottom: 0.8rem;
+    color: #333;
+}
+
+.instructions {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 1.8rem;
+    /* Tăng khoảng cách dưới */
+    line-height: 1.5;
+    /* Tăng dãn dòng */
+
+}
+
+.confirmationData {
+    margin-bottom: 2rem;
+    /* Khoảng cách dưới khu vực data */
+    text-align: left;
+    /* Căn trái cho phần data */
+}
+
+.dataRow {
+    display: flex;
+
+    padding: 0.5rem;
+
+    align-items: flex-start;
+
+}
+
+.dataLabel {
+    width: 110px;
+   
+    flex-shrink: 0;
+   
+    margin-right: 5rem;     /* Tạo khoảng cách giữa label và value */
+       
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #212529;
+    text-align: left;
+}
+
+.dataValue {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #212529;
+    text-align: left;
+
+}
+
+.confirmButton {
+    /* Style giống nút submit trên form mobile */
+    width: 100%;
+    padding: 0.9rem 1rem;
+    background-color: #212529;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out;
+    margin-top: 0.5rem;
+    /* Khoảng cách từ data tới nút */
+}
+
+.confirmButton:hover {
+    background-color: #343a40;
+}
+
+.backButton {
+    background: none;
+    border: none;
+    color: #000000;
+    /* Màu link */
+
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: block;
+    /* Xuống dòng riêng */
+    margin: 1rem auto 0 auto;
+    /* Căn giữa và thêm khoảng cách trên */
+    padding: 0.3rem;
+}
+
+.backButton:hover {
+    color: #000000;
+}
+
+/* --- Responsive  --- */
