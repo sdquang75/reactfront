@@ -1,0 +1,45 @@
+
+  .header {
+    display: flex;
+    justify-content: space-between; /* Đẩy title sang trái, button sang phải */
+    align-items: center; /* Căn giữa các item theo chiều dọc */
+    padding: 0.8rem 1rem; /* Padding trên dưới ít hơn, ngang giữ nguyên */
+    /* Cân nhắc padding-top/bottom với safe-area-inset nếu cần độ chính xác cao */
+    /* padding-top: calc(0.8rem + env(safe-area-inset-top)); */
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    flex-shrink: 0; /* Không co header */
+    position: sticky; /* Giữ header cố định khi cuộn nếu cần */
+    top: 0;
+    z-index: 10; /* Đảm bảo header nổi lên trên */
+  }
+  
+  .headerTitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+    color: #333;
+  }
+  
+  .logoutButton {
+    background-color: #212529;
+    border: none;
+    color: #ffffff; /* Màu xanh dương cho link/button */
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.3rem 0.5rem; /* Thêm chút padding để dễ nhấn */
+ 
+    border-radius: 4px;
+  }
+  
+  /* Thêm style cho icon nếu bạn dùng thư viện icon */
+  /* .logoutButton svg { margin-right: 0.3rem; } */
+  .ButtonIcon{
+    font-size: 0.9rem;
+    
+  }
+.logoutButton:hover {
+    background-color: #343a40;
+
+  }
