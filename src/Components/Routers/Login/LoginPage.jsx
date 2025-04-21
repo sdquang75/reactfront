@@ -2,10 +2,18 @@ import React, { useState } from 'react';
 import styles from './LoginPage.module.css';
 import { Link } from 'react-router-dom';
 import Header from '../../Common/Header/Header';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 function LoginPage() {
   const [employeeId, setEmployeeId] = useState('');
   const [password, setPassword] = useState('');
+  // State và hàm toggle password
+  const [showPassword, setShowPassword] = useState(true);
+  
 
+    // Hàm xử lý bật/tắt password
+    const togglePasswordVisibility = () => {
+      setShowPassword(!showPassword);
+    };
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('Employee ID:', employeeId);
@@ -47,14 +55,24 @@ function LoginPage() {
                 パスワード
               </label>
               <input
-                type="password"
+                 type={showPassword ? 'password' : 'type'}
                 id="password"
                 className={styles.input}
                 placeholder=""
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-              />
+                
+              /> <button
+              type="button" // Quan trọng
+              onClick={togglePasswordVisibility}
+              className={styles.passwordToggle}
+              aria-label={showPassword ? "Hide password" : "Show password"}
+            >
+              {/* Hiển thị icon tương ứng */}
+              {showPassword ? <FiEyeOff /> : <FiEye />}
+            </button>
+              
             </div>
             <Link to="/safety">
               <button type="submit" className={styles.button}>

@@ -14,7 +14,7 @@ function Header({ title = "安否確認システム", showLogout = true, onLogou
       <h1 className={styles.headerTitle}>{title}</h1>
       {showLogout && (
         <Link to ="/login"> <button onClick={onLogout}  className={styles.logoutButton}>
-        <i className={styles.ButtonIcon}><FiUserX /> </i>
+        {/* <i className={styles.ButtonIcon}><FiUserX /> </i> */}
           ログアウト
         </button></Link>
       )}

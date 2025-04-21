@@ -19,7 +19,7 @@
 }
 
 .modalBox {
-    background: white;
+    background: #F9FAFB;
     padding: 2rem 2.5rem 2rem 2.5rem;
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -104,11 +104,12 @@
 
 .dataLabel {
     width: 110px;
-   
+
     flex-shrink: 0;
-   
-    margin-right: 5rem;     /* Tạo khoảng cách giữa label và value */
-       
+
+    margin-right: 5rem;
+    /* Tạo khoảng cách giữa label và value */
+
     font-size: 0.95rem;
     font-weight: 600;
     color: #212529;
@@ -144,22 +145,25 @@
 }
 
 .backButton {
+    width: 100%;
     background: none;
     border: none;
+    border-radius: 6px;
+    background-color: #ffffff;
     color: #000000;
-    /* Màu link */
-
+    padding: 0.9rem 1rem;
     cursor: pointer;
     font-size: 0.9rem;
     display: block;
-    /* Xuống dòng riêng */
+    transition: background-color 0.15s ease-in-out;
     margin: 1rem auto 0 auto;
-    /* Căn giữa và thêm khoảng cách trên */
+
     padding: 0.3rem;
 }
 
 .backButton:hover {
-    color: #000000;
+    /* background-color: #aaa; */
+    color: #565656;
 }
 
 /* --- Responsive  --- */
