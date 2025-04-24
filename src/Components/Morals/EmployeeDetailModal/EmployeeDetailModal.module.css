@@ -1,0 +1,178 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  /* Giống spec */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+.modalBox {
+  background: #F9FAFB;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+  max-width: 400px;
+  width: 95%;
+  position: relative;
+  text-align: left;
+  box-sizing: border-box;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 0.8rem;
+  /* X */
+  right: 0.8rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  /*  X */
+  color: #6c757d;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0.2rem;
+  display: flex;
+}
+
+.closeButton:hover {
+  color: #333;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 1.5rem 0;
+  color: #000000;
+  text-align: center;
+}
+
+/* --- Style mới cho phần header của dialog --- */
+.employeeHeader {
+  display: flex;
+  justify-content: space-between;
+  /* Tên/Status bên trái, nút sửa bên phải */
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid #eee;
+  /* Đường kẻ phân cách  */
+}
+
+.nameAndStatus {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.employeeName {
+  font-size: 1.1rem;
+  /* Tên to hơn chút */
+  font-weight: 600;
+  color: #000000;
+}
+
+.editButton,
+.editButtonDisabled {
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  margin-left: 0.5rem;
+  /* Khoảng cách với phần tên/status */
+  color: #6c757d;
+  /* Màu icon sửa */
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.editButton {
+  cursor: pointer;
+}
+
+.editButton:hover {
+  color: #343a40;
+}
+
+.editButtonDisabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+
+/* --- Tái sử dụng style cho phần details data --- */
+.detailsData {
+  margin-bottom: 0.5rem;
+}
+
+.dataRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0;
+}
+
+.dataRow:last-child {
+  /* border-bottom: none; */
+}
+
+.dataLabel {
+  font-size: 14px;
+  /* Giống spec */
+  font-weight: 500;
+  color: #374151;
+  margin-right: 1rem;
+  line-height: 17px;
+  white-space: nowrap;
+}
+
+.dataValue {
+  font-size: 14px;
+  /* Giống spec */
+  font-weight: 500;
+  color: #000000;
+  /* Màu đen từ spec */
+  text-align: right;
+  line-height: 17px;
+  word-break: break-word;
+  /* Cho phép xuống dòng nếu giá trị dài */
+}
+
+/* --- Responsive--- */
+@media (min-width: 768px) {
+  .modalBox {
+    max-width: 450px;
+    /* Tăng nhẹ max-width trên PC */
+    padding: 2rem;
+  }
+
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .employeeName {
+    font-size: 1.2rem;
+  }
+}

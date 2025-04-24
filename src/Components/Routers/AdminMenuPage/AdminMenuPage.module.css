@@ -1,0 +1,48 @@
+
+.page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #F3F4F6; 
+  }
+  
+  .mainContent {
+    flex-grow: 1;
+    padding: 1.5rem 1rem; /* Padding cho nội dung chính */
+    display: flex;
+    justify-content: center; /* Căn giữa container menu */
+  }
+  
+  .menuContainer {
+    width: 100%;
+    max-width: 500px; /* Giới hạn độ rộng tối đa của khu vực menu */
+    display: flex;
+    flex-direction: column; /* Xếp các card theo cột */
+    gap: 1.5rem; /* Khoảng cách giữa các card */
+  }
+  
+  /* Responsive */
+  @media (min-width: 768px) {
+    .mainContent {
+      padding: 2rem;
+    }
+  
+    .menuContainer {
+      max-width: 600px; /* Có thể cho rộng hơn trên PC */
+      gap: 2rem; /* Tăng khoảng cách card trên PC */
+      /* Nếu muốn hiển thị 2 cột trên màn hình lớn hơn */
+      /* max-width: 900px; */
+      /* display: grid; */
+      /* grid-template-columns: repeat(2, 1fr); */
+    }
+  }
+  
+  @media (min-width: 1024px) {
+     /* layout 2 cột cho màn hình lớn hơn nữa */
+    .menuContainer {
+       max-width: 900px; /* big */
+       display: grid;
+       grid-template-columns: repeat(2, 1fr); /* 2 columns */
+       gap: 2rem;
+    }
+  }

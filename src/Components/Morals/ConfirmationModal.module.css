@@ -7,12 +7,12 @@
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.8);
-    /* Màu đen mờ */
+
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    /* Đảm bảo nổi lên trên cùng */
+
     padding: 1rem;
     /* Đệm để modal không chạm sát viền màn hình */
     box-sizing: border-box;
@@ -24,16 +24,16 @@
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     max-width: 450px;
-    /* Giới hạn chiều rộng */
+
     width: 100%;
-    /* Chiếm phần lớn chiều rộng trên mobile */
+
     position: relative;
     /* Để định vị nút đóng */
     text-align: center;
     /* Căn giữa text mặc định */
     box-sizing: border-box;
     animation: fadeIn 0.2s ease-out;
-    /* Hiệu ứng xuất hiện đơn giản */
+
 }
 
 @keyframes fadeIn {
@@ -68,10 +68,10 @@
 
 .title {
     font-size: 1.5rem;
-    /* Điều chỉnh kích thước */
+
     font-weight: 600;
     margin-top: 0.25rem;
-    /* Thêm khoảng cách trên nếu cần */
+
     margin-bottom: 0.8rem;
     color: #333;
 }
@@ -137,7 +137,7 @@
     cursor: pointer;
     transition: background-color 0.15s ease-in-out;
     margin-top: 0.5rem;
-    /* Khoảng cách từ data tới nút */
+
 }
 
 .confirmButton:hover {
@@ -162,8 +162,12 @@
 }
 
 .backButton:hover {
-    /* background-color: #aaa; */
+    /* background-c
+    olor: #aaa; */
     color: #565656;
+
+
 }
 
 /* --- Responsive  --- */
+/* Not yet */

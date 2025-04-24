@@ -12,9 +12,11 @@ function Header({ title = "安否確認システム", showLogout = true, onLogou
   return (
     <header className={styles.header}>
       <h1 className={styles.headerTitle}>{title}</h1>
+
+      {/* <Link to="/admin"><h1 className={styles.headerTitle}>{title}</h1></Link> */}
       {showLogout && (
-        <Link to ="/login"> <button onClick={onLogout}  className={styles.logoutButton}>
-        {/* <i className={styles.ButtonIcon}><FiUserX /> </i> */}
+        <Link to="/login"> <button onClick={onLogout} className={styles.logoutButton}>
+          {/* <i className={styles.ButtonIcon}><FiUserX /> </i> */}
           ログアウト
         </button></Link>
       )}

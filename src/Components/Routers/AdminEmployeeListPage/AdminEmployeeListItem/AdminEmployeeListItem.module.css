@@ -1,0 +1,76 @@
+
+.itemRow {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 0.5rem;
+    border-bottom: 1px solid #D1D5DB;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .itemRow:last-child {
+    border-bottom: none;
+  }
+  
+  .cell {
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 500;
+    color: #000000;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  /* Điều chỉnh độ rộng  */
+  .employeeId {
+    flex-basis: 70px;
+    flex-shrink: 0;
+    text-align: left;
+  }
+  
+  .employeeName {
+    flex-basis: 110px; /* Có thể cần điều chỉnh */
+    flex-grow: 1;
+    text-align: left;
+  }
+  
+
+  .department {
+    flex-basis: 80px; /* Điều chỉnh độ rộng */
+    flex-shrink: 0;
+    text-align: center; /* Hoặc left */
+  }
+  
+  .details {
+    flex-basis: 50px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .detailsButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: #747575;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .detailsButton:hover {
+    color: #333;
+  }
+  
+  /* Responsive */
+  @media (min-width: 768px) {
+      .itemRow { padding: 0.9rem 0.75rem; }
+      .cell { padding: 0 0.75rem; }
+      .employeeId { flex-basis: 100px; }
+      .employeeName { flex-basis: 200px; } /* Tăng độ rộng tên */
+      .department { flex-basis: 120px; text-align: left;} /* Tăng độ rộng và căn trái */
+      .details { flex-basis: 60px; }
+  }

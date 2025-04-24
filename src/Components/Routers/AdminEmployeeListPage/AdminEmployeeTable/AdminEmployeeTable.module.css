@@ -1,0 +1,56 @@
+
+.tableContainer {
+    width: 100%;
+    border: 1px solid #D1D5DB;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 1.5rem;
+    background-color: #ffffff;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .tableHeader {
+    display: flex;
+    background: #F3F4F6; /* Màu nền header từ spec */
+    padding: 0.8rem 0.5rem;
+    border-bottom: 1px solid #D1D5DB;
+  }
+  
+  .headerCell {
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 500;
+    color: #747575; /* Màu chữ header */
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+    white-space: nowrap;
+  }
+  
+  /* Độ rộng cột tương ứng AdminEmployeeListItem */
+  .employeeId { flex-basis: 70px; flex-shrink: 0; text-align: left; }
+  .employeeName { flex-basis: 110px; flex-grow: 1; text-align: left; }
+  /* Đổi tên class cột */
+  .department { flex-basis: 80px; flex-shrink: 0; text-align: center; }
+  .details { flex-basis: 50px; flex-shrink: 0; text-align: center; }
+  
+  .tableBody {
+    
+  }
+  
+  .noData {
+    padding: 2rem;
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9rem;
+  }
+  
+  /* Responsive */
+  @media (min-width: 768px) {
+      .tableHeader { padding: 0.9rem 0.75rem; }
+      .headerCell { padding: 0 0.75rem; }
+      .employeeId { flex-basis: 100px; }
+      .employeeName { flex-basis: 200px; }
+      .department { flex-basis: 120px; text-align: left;}
+      .details { flex-basis: 60px; }
+  }
+  /* Van thieu */

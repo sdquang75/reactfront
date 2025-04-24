@@ -1,0 +1,184 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1010;
+  /* Cao hơn modal detail nếu mở chồng */
+  padding: 1rem;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+.modalBox {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  max-width: 420px;
+  /* Giữ kích thước tương tự trang Report */
+  width: 95%;
+  position: relative;
+  text-align: center;
+  box-sizing: border-box;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #6c757d;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0.2rem;
+  display: flex;
+}
+
+.closeButton:hover {
+  color: #333;
+}
+
+.title {
+  font-size: 1.3rem;
+  /* Giảm nhẹ size */
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  color: #000000;
+  text-align: center;
+  padding-right: 20px;
+  /* Tránh nút X */
+}
+
+.instructions {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1.8rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* --- Style cho Form và Radio Groups  --- */
+.form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  /* Căn trái label và các nhóm */
+}
+
+.radioGroup {
+  border: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+  /* Giảm khoảng cách giữa các group */
+}
+
+.radioGroup:last-of-type {
+  margin-bottom: 2rem;
+  /* Khoảng cách trước nút Save */
+}
+
+.groupLabel {
+  display: block;
+  /* Hiển thị trên 1 dòng riêng */
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  /* Giảm khoảng cách dưới label */
+  color: #495057;
+  padding: 0;
+}
+
+.radioOptionsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  /* Cho phép xuống dòng nếu cần */
+  gap: 0.8rem 1.5rem;
+  /* Khoảng cách options */
+}
+
+.radioOption {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.radioInput {
+  margin-right: 0.5rem;
+  width: 1.1em;
+  height: 1.1em;
+  cursor: pointer;
+  accent-color: #212529;
+  /* Màu tick */
+}
+
+.radioLabel {
+  font-size: 0.95rem;
+  color: #333;
+  cursor: pointer;
+}
+
+.radioOption input[type="radio"]+label {
+  position: relative;
+  padding-left: 2px;
+}
+
+/* --- Style  Save button --- */
+.saveButton {
+  /* Style giống nút submit chính */
+  width: 100%;
+  padding: 0.9rem 1rem;
+  background-color: #18181B;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  /* Khoảng cách trên nút */
+  transition: background-color 0.15s ease-in-out;
+}
+
+.saveButton:hover {
+  background-color: #343a40;
+}
+
+/* --- Responsive --- */
+@media (min-width: 768px) {
+  .modalBox {
+    max-width: 480px;
+    /* Có thể rộng hơn chút trên PC */
+    padding: 2rem;
+  }
+
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .instructions {
+    font-size: 1rem;
+  }
+
+
+}

@@ -1,0 +1,80 @@
+/* src/Components/Routers/EmployeeSafetyList/SafetyListItem/SafetyListItem.module.css */
+.itemRow {
+    display: flex; /* Sử dụng flex để căn chỉnh các cell */
+    align-items: center; /* Căn giữa các cell theo chiều dọc */
+    padding: 0.8rem 0.5rem; /* Padding trên dưới và chút padding ngang cho mỗi hàng */
+    border-bottom: 1px solid #D1D5DB; /* Đường kẻ ngang phân cách */
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .itemRow:last-child {
+    border-bottom: none; /* Bỏ đường kẻ cho hàng cuối cùng */
+  }
+  
+  .cell {
+    font-size: 14px; /* Font size chung từ spec */
+    line-height: 17px; /* Line height từ spec */
+    font-weight: 500;
+    color: #000000;
+    padding: 0 0.5rem; /* Padding ngang cho mỗi cell */
+    box-sizing: border-box;
+    white-space: nowrap; /* Ngăn nội dung xuống dòng */
+    overflow: hidden; /* Ẩn nội dung tràn */
+    text-overflow: ellipsis; /* Hiển thị '...' nếu nội dung quá dài */
+  }
+  
+  /* Định nghĩa độ rộng tương đối hoặc cố định cho các cột */
+  .employeeId {
+    flex-basis: 70px; /* Độ rộng cơ sở */
+    flex-shrink: 0; /* Không co lại */
+    text-align: left;
+  }
+  
+  .employeeName {
+    flex-basis: 100px; /* Rộng hơn cho tên */
+    flex-grow: 1; /* Cho phép co giãn nếu cần thêm không gian */
+    text-align: left;
+  }
+  
+  .status {
+    flex-basis: 70px;
+    flex-shrink: 0;
+    display: flex; /* Căn giữa badge */
+    justify-content: center;
+  }
+  
+  .details {
+    flex-basis: 50px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .detailsButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: #747575; /* Màu icon từ spec */
+    font-size: 1.2rem; /* Kích thước icon */
+    display: flex;
+    align-items: center;
+  }
+  
+  .detailsButton:hover {
+    color: #333;
+  }
+  
+  /* Responsive cho PC - có thể tăng độ rộng cột */
+  @media (min-width: 768px) {
+      .itemRow {
+          padding: 0.9rem 0.75rem;
+      }
+      .cell {
+          padding: 0 0.75rem;
+      }
+      .employeeId { flex-basis: 100px; }
+      .employeeName { flex-basis: 180px; }
+      .status { flex-basis: 90px; }
+      .details { flex-basis: 60px; }
+  }

@@ -1,0 +1,59 @@
+/* src/Components/Routers/EmployeeSafetyList/SafetyListTable/SafetyListTable.module.css */
+.tableContainer {
+    width: 100%;
+    border: 1px solid #D1D5DB; /* Border từ Rectangle 21 */
+    border-radius: 6px; /* Border radius từ Rectangle 21 */
+    overflow: hidden; /* Đảm bảo bo góc được áp dụng */
+    margin-top: 1.5rem; /* Khoảng cách từ bộ lọc tới bảng */
+    background-color: #ffffff; /* Nền trắng cho body bảng */
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .tableHeader {
+    display: flex;
+    background: #F3F4F6; /* Màu nền từ Rectangle 22 */
+    /* border-radius: 6px 6px 0px 0px; -- Không cần nếu .tableContainer đã có */
+    padding: 0.8rem 0.5rem; /* Padding giống item row */
+    border-bottom: 1px solid #D1D5DB; /* Đường kẻ dưới header */
+  }
+  
+  .headerCell {
+    font-size: 14px; /* Font size từ spec */
+    line-height: 17px; /* Line height từ spec */
+    font-weight: 500;
+    color: #747575; /* Màu chữ header từ spec */
+    padding: 0 0.5rem; /* Padding ngang giống item cell */
+    box-sizing: border-box;
+    white-space: nowrap;
+  }
+  
+  /* Định nghĩa độ rộng cột tương ứng với SafetyListItem */
+  .employeeId { flex-basis: 70px; flex-shrink: 0; text-align: left; }
+  .employeeName { flex-basis: 100px; flex-grow: 1; text-align: left; }
+  .status { flex-basis: 70px; flex-shrink: 0; text-align: center; }
+  .details { flex-basis: 50px; flex-shrink: 0; text-align: center; }
+  
+  .tableBody {
+    /* Không cần style gì đặc biệt ở đây, các hàng sẽ tự xếp */
+  }
+  
+  .noData {
+    padding: 2rem;
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9rem;
+  }
+  
+  /* Responsive cho PC - tăng độ rộng cột */
+  @media (min-width: 768px) {
+      .tableHeader {
+          padding: 0.9rem 0.75rem;
+      }
+      .headerCell {
+           padding: 0 0.75rem;
+      }
+     .employeeId { flex-basis: 100px; }
+     .employeeName { flex-basis: 180px; }
+     .status { flex-basis: 90px; }
+     .details { flex-basis: 60px; }
+  }
