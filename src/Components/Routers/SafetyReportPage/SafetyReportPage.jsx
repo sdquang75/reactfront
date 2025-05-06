@@ -4,7 +4,7 @@ import ConfirmationModal from '../../Morals/ConfirmationModal';
 import { FiUserX } from "react-icons/fi";
 
 import { Link } from 'react-router-dom';
-import Header from '../../Common/Header/Header';
+
 function SafetyReportPage({ onLogout }) {
   const [safetyStatus, setSafetyStatus] = useState('');
   const [attendanceStatus, setAttendanceStatus] = useState('');
@@ -45,14 +45,7 @@ function SafetyReportPage({ onLogout }) {
 
   return (
     <div className={styles.page}>
-      {/* <header className={styles.header}>
-        <h1 className={styles.headerTitle}>安否確認システム</h1>
-        <Link to ="/login"> <button onClick={onLogout}  className={styles.logoutButton}>
-        <i className={styles.ButtonIcon}><FiUserX /> </i>
-          ログアウト
-        </button></Link>
-      </header> */}
-      <Header />
+      
 
       <main className={styles.mainContent}>
         <div className={styles.formContainer}>

@@ -1,15 +1,15 @@
 import React from 'react';
 import './NotFound.css';
-import Header from '../../Header/Header';
-import { useLanguage } from '../../../MISC/LanguageContext';
+import Header from '../../Common/Header/Header';
+
 const NotFound = () => {
-  const {language, toggleLanguage, t} = useLanguage();
+
   return (
     <>
       <Header />
       <div className="notfound-container">
-        <h1>{t.context.S13}</h1>
-        <p>{t.context.S14}</p>
+        <h1>Sorry</h1>
+        <p>Not found</p>
        
       </div>
     </>

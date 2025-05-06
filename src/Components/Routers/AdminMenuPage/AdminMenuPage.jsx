@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './AdminMenuPage.module.css';
-import Header from '../../Common/Header/Header';
+
 import AdminMenuItem from './AdminMenuItem/AdminMenuItem';
 
 
@@ -23,7 +23,7 @@ function AdminMenuPage({ onLogout }) {
   return (
     <div className={styles.page}>
       {/* Header */}
-      <Header showLogout={true} onLogout={onLogout} />
+
 
 
       {/* ///////////////////////////////////////////////// */}

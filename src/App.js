@@ -1,26 +1,147 @@
-import logo from './logo.svg';
 import './App.css';
-import { ChakraProvider } from '@chakra-ui/react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Login from './Components/Routers/Login/LoginPage'
+import React, { useState, useEffect } from 'react';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+// --- (Pages) ---
+import LoginPage from './Components/Routers/Login/LoginPage';
 import SafetyReportPage from './Components/Routers/SafetyReportPage/SafetyReportPage';
 import EmployeeSafetyList from './Components/Routers/EmployeeSafetyList/EmployeeSafetyList';
-
 import AdminMenuPage from './Components/Routers/AdminMenuPage/AdminMenuPage';
 import AdminEmployeeListPage from './Components/Routers/AdminEmployeeListPage/AdminEmployeeListPage';
+import NotFound from './Components/Routers/404/NotFound';
+
+
+import Header from './Components/Common/Header/Header';
+import ResetLocation from './Components/Misc/ResetLocation'; // Đảm bảo component này tồn tại
 
 function App() {
+  const [currentUser, setCurrentUser] = useState({
+    emp_no: "00193",
+    name: "大野 未来",
+    department: "総務",
+    status: "safe",
+    commute: "テレワーク",
+    injury: "なし",
+    timestamp: "2025-05-01T01:25:12Z",
+    role: "admin",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
+
+  // --- useEffect Hook ---
+ /* useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        setCurrentUser(parsedUser);
+      } catch (error) {
+
+        localStorage.removeItem('user');
+      }
+    }
+    setIsLoading(false);
+  }, []);*/
+
+
+  const handleLoginSuccess = (userData) => {
+
+    setCurrentUser(userData);
+
+    localStorage.setItem('user', JSON.stringify(userData));
+
+  };
+
+
+  const handleLogout = () => {
+    console.log("Logging out...");
+    setCurrentUser(null);
+    localStorage.removeItem('user');
+
+    navigate('/login');
+  };
+
+
+  // if (isLoading) {
+  //   return <div className="loading-indicator">Loading...</div>;
+  // }
+
+
   return (
-    <Router>
+    <>
+
+<Header currentUser={currentUser} onLogout={handleLogout} />
       <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/safety" element={<SafetyReportPage />} />
-        <Route path='/safetylist' element={<EmployeeSafetyList />} />
-        <Route path='/admin' element={<AdminMenuPage />} />
-        <Route path='/employees' element={<AdminEmployeeListPage />} />
+
+        <Route
+          path="/login"
+          element={
+            currentUser ? (
+              <Navigate to={currentUser.role === 'admin' ? '/admin' : '/safetylist'} replace />
+            ) : (
+
+              <LoginPage onLoginSuccess={handleLoginSuccess} />
+            )
+          }
+        />
+
+
+        <Route
+          path="/safety"
+          element={
+            currentUser ? <SafetyReportPage /> : <Navigate to="/login" replace />
+          }
+        />
+
+
+        <Route
+          path='/safetylist'
+          element={
+            currentUser ? <EmployeeSafetyList /> : <Navigate to="/login" replace />
+          }
+        />
+
+
+        <Route
+          path='/admin'
+          element={
+            currentUser && currentUser.role === 'admin' ? (
+              <AdminMenuPage />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+
+
+        <Route
+          path='/employees'
+          element={
+            currentUser && currentUser.role === 'admin' ? (
+              <AdminEmployeeListPage />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+
+
+        <Route
+          path="/"
+          element={
+            currentUser ? (
+              <Navigate to={currentUser.role === 'admin' ? '/admin' : '/safetylist'} replace />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
-    </Router>
+    </>
   );
 }
 

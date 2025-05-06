@@ -80,7 +80,7 @@ function EmployeeDetailModal({ isOpen, onClose, employeeData }) {
           <div className={styles.dataRow}>
             <span className={styles.dataLabel}>【出社状況】</span>
             {/* employeeData */}
-            <span className={styles.dataValue}>{employeeData.attendance || '未登録'}</span>
+            <span className={styles.dataValue}>{employeeData.commute || '未登録'}</span>
           </div>
           <div className={styles.dataRow}>
             <span className={styles.dataLabel}>【怪我の状況】</span>
@@ -90,7 +90,7 @@ function EmployeeDetailModal({ isOpen, onClose, employeeData }) {
           <div className={styles.dataRow}>
             <span className={styles.dataLabel}>【登録日時】</span>
             <span className={styles.dataValue}>
-              {formatDateTime(employeeData.registrationTime)}
+              {formatDateTime(employeeData.timestamp)}
             </span>
           </div>
         </div>

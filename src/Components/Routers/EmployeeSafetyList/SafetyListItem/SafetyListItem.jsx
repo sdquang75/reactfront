@@ -22,7 +22,7 @@ function SafetyListItem({ employee, onViewDetails }) {
   
   return (
     <div className={styles.itemRow}>
-      <span className={`${styles.cell} ${styles.employeeId}`}>{employee.id || 'N/A'}</span>
+      <span className={`${styles.cell} ${styles.employeeId}`}>{employee.emp_no || 'N/A'}</span>
       <span className={`${styles.cell} ${styles.employeeName}`}>{employee.name || 'N/A'}</span>
       <span className={`${styles.cell} ${styles.status}`}>
         <StatusBadge status={employee.status} />
