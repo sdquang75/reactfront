@@ -15,9 +15,9 @@ function AdminMenuPage({ onLogout }) {
   const goToSafetyReport = () => navigate('/safety'); // Điều hướng đến trang safety
   const goToSafetyList = () => navigate('/safetylist'); // ĐH đến trang safetylist
   const goToEmployeeList = () => navigate('/employees'); // ĐH đến trang  employees
-  const goToAddEmployee = () => navigate('/admin/add-employee');
+  const goToAddEmployee = () => navigate('/add-employee');
   // ĐH đến trang ...................
-  const goToDeleteReports = () => navigate('/admin/delete-reports');
+  const goToDeleteReports = () => navigate('/delete-employee');
   // ĐH đến trang ...................
 
   return (

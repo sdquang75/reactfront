@@ -1,45 +1,136 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  /* Đẩy title sang trái, button sang phải */
+  align-items: center;
+  /* Căn giữa các item theo chiều dọc */
+  padding: 0.8rem 1rem;
+  /* Padding trên dưới ít hơn, ngang giữ nguyên */
+  /* Cân nhắc padding-top/bottom với safe-area-inset nếu cần độ chính xác cao */
+  /* padding-top: calc(0.8rem + env(safe-area-inset-top)); */
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+  /* Không co header */
+  position: sticky;
+  /* Giữ header cố định khi cuộn nếu cần */
+  top: 0;
+  z-index: 10;
+  /* Đảm bảo header nổi lên trên */
+}
 
-  .header {
-    display: flex;
-    justify-content: space-between; /* Đẩy title sang trái, button sang phải */
-    align-items: center; /* Căn giữa các item theo chiều dọc */
-    padding: 0.8rem 1rem; /* Padding trên dưới ít hơn, ngang giữ nguyên */
-    /* Cân nhắc padding-top/bottom với safe-area-inset nếu cần độ chính xác cao */
-    /* padding-top: calc(0.8rem + env(safe-area-inset-top)); */
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    flex-shrink: 0; /* Không co header */
-    position: sticky; /* Giữ header cố định khi cuộn nếu cần */
-    top: 0;
-    z-index: 10; /* Đảm bảo header nổi lên trên */
-  }
-  
-  .headerTitle {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin: 0;
-    color: #333;
-  }
-  
-  .logoutButton {
-    background-color: #212529;
-    border: none;
-    color: #ffffff; /* Màu xanh dương cho link/button */
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 500;
-    padding: 0.3rem 0.5rem; /* Thêm chút padding để dễ nhấn */
- 
-    border-radius: 4px;
-  }
-  
-  /* Thêm style cho icon nếu bạn dùng thư viện icon */
-  /* .logoutButton svg { margin-right: 0.3rem; } */
-  .ButtonIcon{
-    font-size: 0.9rem;
-    
-  }
+
+
+.logoutButton {
+  background-color: #212529;
+  border: none;
+  color: #ffffff;
+  /* Màu xanh dương cho link/button */
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.3rem 0.5rem;
+  /* Thêm chút padding để dễ nhấn */
+
+  border-radius: 4px;
+}
+
+/* Thêm style cho icon nếu bạn dùng thư viện icon */
+/* .logoutButton svg { margin-right: 0.3rem; } */
+.ButtonIcon {
+  font-size: 0.9rem;
+
+}
+
+
+
 .logoutButton:hover {
-    background-color: #343a40;
+  background-color: #343a40;
 
+}
+
+
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  /* Khoảng cách giữa tên và nút logout */
+  min-width: 0;
+  /* Cho phép container này co lại */
+  flex-shrink: 1;
+  /* Cho phép container này co lại nếu cần */
+}
+
+.userName {
+  font-size: 0.9rem;
+  color: #333;
+
+  /* --- CSS để ngăn xuống dòng và hiển thị ellipsis --- */
+  white-space: nowrap;
+  /* Ngăn xuống dòng */
+  overflow: hidden;
+  /* Ẩn phần bị tràn */
+  text-overflow: ellipsis;
+  /* Hiển thị dấu ... */
+  min-width: 0;
+  /* Cho phép co lại trong flexbox */
+  /* max-width: 150px; */
+  /* Tùy chọn: Giới hạn độ rộng tối đa nếu cần */
+  /* ---------------------------------------------------- */
+}
+
+.logoutButton {
+  /* ... style nút logout ... */
+  flex-shrink: 0;
+  /* Không cho nút logout bị co lại */
+}
+
+
+.headerTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+  white-space: nowrap;
+  /* Ngăn tiêu đề xuống dòng */
+  /* overflow: hidden;
+  text-overflow: ellipsis; */
+  /* Có thể thêm flex-shrink và min-width nếu layout phức tạp hơn */
+  flex-shrink: 1;
+  /* Cho phép co lại */
+  min-width: 50px;
+  /* Độ rộng tối thiểu trước khi bị ẩn */
+  margin-right: 1rem;
+  /* Thêm khoảng cách phải với phần actions */
+  
+}
+
+
+
+
+/* Responsive cho PC */
+@media (min-width: 768px) {
+  .header {
+    padding: 0.75rem 2rem;
+    background-color: #e9ecef;
+    box-shadow: none;
   }
+
+  .headerTitle {
+    font-size: 1rem;
+    color: #495057;
+    min-width: 100px;
+    /* Tăng min-width trên PC */
+  }
+
+  .userInfo {
+    gap: 1.2rem;
+  }
+
+  .userName {
+    font-size: 1rem;
+    /* max-width: 200px; */
+    /* Giới hạn khác trên PC nếu muốn */
+  }
+}

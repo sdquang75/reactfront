@@ -1,0 +1,145 @@
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 1rem;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .modalBox {
+    background: #F9FAFB; 
+    padding: 1.5rem;
+    border-radius: 10px; 
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15); 
+    max-width: 400px; 
+    width: 95%;
+    position: relative;
+    text-align: center;
+    box-sizing: border-box;
+    animation: fadeIn 0.2s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  
+  .closeButton {
+    position: absolute;
+    top: 0.8rem;
+    right: 0.8rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #6c757d; 
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.2rem;
+    display: flex;
+  }
+  .closeButton:hover { color: #333; }
+  
+  .title {
+    font-size: 25px; 
+    font-weight: 600; 
+    line-height: 30px; 
+    margin: 0.5rem 0 0.8rem 0; 
+    color: #000000; 
+    text-align: center;
+    padding-right: 20px; 
+  }
+  
+  .instructions {
+    font-size: 14px;
+    font-weight: 500; 
+    line-height: 17px; 
+    text-align: center;
+    color: #4B5563;
+    margin: 0 0 1.8rem 0;
+  }
+  
+
+  .confirmationData {
+    margin-bottom: 1.5rem; 
+    text-align: left;
+  }
+  
+
+  .dataRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    padding: 0.6rem 0; 
+    border-bottom: 1px solid #eee; 
+    gap: 1rem;
+  }
+  .dataRow:last-child { border-bottom: none; }
+  
+  .dataLabel {
+    font-size: 14px;
+    font-weight: 500; 
+    color: #000000; 
+    line-height: 17px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  
+  .dataValue {
+    font-size: 14px; 
+    font-weight: 500;
+    color: #000000; 
+    text-align: right;
+    line-height: 17px; 
+    word-break: break-word;
+  }
+  
+  
+  
+  .confirmButton {
+    width: 100%;
+    padding: 0.7rem 1rem; /* Khớp height ~40px */
+    background: #18181B; 
+    color: #FFFFFF; 
+    border: none;
+    border-radius: 6px; 
+    font-size: 14px; 
+    font-weight: 500; 
+    line-height: 17px; 
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out;
+    margin-top: 0.5rem;
+  }
+  .confirmButton:hover { background-color: #343a40; }
+  
+  /* Nút Quay lại */
+  .backButton {
+    width: 100%;
+    padding: 0.7rem 1rem; 
+    background: #FFFFFF; 
+    color: #000000; 
+    border: 1px solid #D1D5DB; 
+    border-radius: 6px; 
+    font-size: 14px; 
+    font-weight: 500; 
+    line-height: 17px; 
+    cursor: pointer;
+    margin-top: 0.8rem; 
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  }
+  .backButton:hover { background-color: #f8f9fa; border-color: #adb5bd; }
+  
+  /* Responsive */
+  @media (min-width: 768px) {
+    .modalBox { max-width: 450px; padding: 2rem; }
+    .title { font-size: 1.6rem; }
+    .instructions { font-size: 0.95rem; }
+  }

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import styles from './SafetyReportPage.module.css';
 import ConfirmationModal from '../../Morals/ConfirmationModal';
-import { FiUserX } from "react-icons/fi";
+import BackButton from '../../Misc/BackButton/BackButton';
 
-import { Link } from 'react-router-dom';
+
+
 
 function SafetyReportPage({ onLogout }) {
   const [safetyStatus, setSafetyStatus] = useState('');
@@ -45,7 +46,7 @@ function SafetyReportPage({ onLogout }) {
 
   return (
     <div className={styles.page}>
-      
+      <BackButton/>
 
       <main className={styles.mainContent}>
         <div className={styles.formContainer}>

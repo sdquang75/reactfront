@@ -1,0 +1,125 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
+    
+    padding: 1rem;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+.modalBox {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    /* Bo góc ít hơn */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    max-width: 380px;
+    width: 95%;
+    position: relative;
+    text-align: center;
+    box-sizing: border-box;
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.closeButton {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #9ca3af;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.2rem;
+    display: flex;
+}
+
+.closeButton:hover {
+    color: #333;
+}
+
+.warningIcon {
+    margin-bottom: 0.5rem;
+}
+
+.title {
+    font-size: 1.25rem;
+    /* 20px */
+    font-weight: 600;
+    margin: 0 0 0.8rem 0;
+    color: #1f2937;
+    /* Màu chữ đậm hơn */
+}
+
+.message {
+    font-size: 0.95rem;
+    /* 15px */
+    color: #4b5563;
+    margin: 0 0 1.8rem 0;
+    line-height: 1.6;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 0.8rem;
+    /* Khoảng cách giữa 2 nút */
+    justify-content: center;
+    /* Căn giữa các nút */
+}
+
+.actionButton {
+    flex: 1;
+    /* Chia đều không gian */
+    padding: 0.7rem 1rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    /* Nhỏ hơn nút chính */
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.cancelButton {
+    background-color: #ffffff;
+    color: #374151;
+    border: 1px solid #d1d5db;
+}
+
+.cancelButton:hover {
+    background-color: #f9fafb;
+}
+
+.deleteButton {
+    background-color: #EF4444;
+    /* Màu đỏ */
+    color: #ffffff;
+    border: 1px solid #EF4444;
+}
+
+.deleteButton:hover {
+    background-color: #DC2626;
+    /* Đỏ đậm hơn */
+    border-color: #DC2626;
+}

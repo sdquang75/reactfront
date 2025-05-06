@@ -1,0 +1,152 @@
+
+.page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #F3F4F6; 
+    font-family: 'Inter', sans-serif;
+  }
+
+  .mainContent {
+    flex-grow: 1;
+    padding: 0.5rem 1rem 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .contentContainer {
+    width: 100%;
+    max-width: 600px;
+    background: #F9FAFB; 
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 10px; 
+    padding: 1.5rem;
+    box-sizing: border-box;
+    margin-top: 1rem;
+  }
+  
+  .pageTitle {
+    font-size: 25px; 
+    font-weight: 600; 
+    line-height: 30px; 
+    color: #000000; 
+    text-align: center;
+    margin: 0 0 0.5rem 0;
+  }
+  
+  .instructions {
+    font-size: 14px; 
+    font-weight: 500; 
+    line-height: 17px; 
+    text-align: center;
+    color: #4B5563; 
+    margin: 0 0 1.5rem 0;
+  }
+  
+  /* Box hướng dẫn */
+  .procedureBox {
+    background: #F3F4F6; 
+    border: 1px solid #D1D5DB; 
+    border-radius: 6px; 
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .procedureBox h4 {
+      margin-top: 0;
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1f2937;
+  }
+  
+  .procedureBox .steps {
+      padding-left: 1.2rem;
+      margin: 0;
+      font-size: 14px; 
+      line-height: 1.6; 
+      color: #000000; 
+  }
+  .procedureBox .steps li {
+      margin-bottom: 0.5rem;
+  }
+  .procedureBox .steps li:last-child {
+      margin-bottom: 0;
+  }
+  
+  /* Box cảnh báo */
+  .warningBox {
+    background: #F3F4F6; 
+    border: 1px solid #EF4444; /* spec - border đỏ */
+    border-radius: 6px; 
+    padding: 1rem 1.2rem;
+    margin-top: 1.5rem; /* Khoảng cách với nút Backup */
+    margin-bottom: 1.5rem; /* Khoảng cách với nút Delete */
+  }
+  
+  .warningBox p {
+    margin: 0;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px; 
+    line-height: 1.6; /* Tăng dãn dòng */
+    color: #EF4444; /* spec - chữ đỏ */
+    display: flex; /* Căn icon với text */
+    align-items: flex-start;
+  }
+  
+  .warningIconInline {
+      margin-right: 0.5rem;
+      flex-shrink: 0; /* Không co icon */
+      margin-top: 2px; /* Chỉnh vị trí dọc nếu cần */
+  }
+  
+  
+  /* --- Nút bấm chính --- */
+  .actionButton {
+    width: 100%;
+    padding: 0.7rem 1rem; /* Khớp height ~40px */
+    border: none;
+    border-radius: 6px; 
+    font-size: 14px; 
+    font-weight: 500; 
+    line-height: 17px; 
+    text-align: center;
+    color: #FFFFFF; 
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out, opacity 0.15s ease-in-out;
+  }
+  
+  .actionButton:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+  }
+  
+  /* Nút Backup */
+  .backupButton {
+      background: #000000; 
+  }
+  .backupButton:hover:not(:disabled) {
+      background-color: #333;
+  }
+  
+  /* Nút Delete */
+  .deleteButton {
+      background: #EF4444; 
+  }
+  .deleteButton:hover:not(:disabled) {
+      background-color: #DC2626; /* Đỏ đậm hơn */
+  }
+  
+  
+  /* --- Responsive --- */
+  @media (min-width: 768px) {
+    .mainContent { padding: 1.5rem 2rem 2rem 2rem; }
+    .contentContainer { max-width: 650px; padding: 2rem 2.5rem; }
+    .pageTitle { font-size: 1.8rem; }
+    .instructions { font-size: 0.95rem; }
+    .procedureBox, .warningBox { padding: 1.5rem 2rem; }
+    .actionButton { padding: 0.8rem 1rem; font-size: 1rem;}
+  }

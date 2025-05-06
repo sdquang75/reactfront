@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import styles from './AdminEmployeeListPage.module.css';
-import Header from '../../Common/Header/Header';
+
 import AdminEmployeeTable from './AdminEmployeeTable/AdminEmployeeTable';
 import { FiSearch, FiChevronDown } from 'react-icons/fi';
 import EmployeeDetailModal from '../../Morals/EmployeeDetailModal/EmployeeDetailModal';
@@ -10,12 +10,14 @@ import EmployeeDetailModal from '../../Morals/EmployeeDetailModal/EmployeeDetail
 
 
 import { MOCK_EMPLOYEES, MOCK_DEPARTMENTS } from '../../Misc/DATA/data.js';
+import BackButton from '../../Misc/BackButton/BackButton.jsx';
 
 
 
 
 // --- Component  ---
-function AdminEmployeeListPage({ onLogout }) {
+function AdminEmployeeListPage() {
+
   const [employees, setEmployees] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -72,9 +74,13 @@ function AdminEmployeeListPage({ onLogout }) {
     setSelectedEmployeeData(null);    // Reset dữ liệu nhân viên
   };
 
+
+
+
+
   return (
     <div className={styles.page}>
-      <Header showLogout={true} onLogout={onLogout} />
+     <BackButton/>
 
       <main className={styles.mainContent}>
         <div className={styles.contentContainer}>

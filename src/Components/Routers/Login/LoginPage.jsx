@@ -23,9 +23,6 @@ function LoginPage() {
 
 
 
-    const handlePasswordChange = (event) => {
-      setPassword(event.target.value);
-    };
 
 
 

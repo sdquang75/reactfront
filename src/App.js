@@ -9,10 +9,11 @@ import EmployeeSafetyList from './Components/Routers/EmployeeSafetyList/Employee
 import AdminMenuPage from './Components/Routers/AdminMenuPage/AdminMenuPage';
 import AdminEmployeeListPage from './Components/Routers/AdminEmployeeListPage/AdminEmployeeListPage';
 import NotFound from './Components/Routers/404/NotFound';
-
+import AdminAddEmployeePage from './Components/Routers/AdminAddEmployeePage/AdminAddEmployeePage';
+import AdminDeletePage from './Components/Routers/AdminDeletePage/AdminDeletePage';
 
 import Header from './Components/Common/Header/Header';
-import ResetLocation from './Components/Misc/ResetLocation'; // Đảm bảo component này tồn tại
+import ScrollToTop from './Components/Misc/ScrollOnTop';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
@@ -72,6 +73,8 @@ function App() {
     <>
 
 <Header currentUser={currentUser} onLogout={handleLogout} />
+<ScrollToTop/>
+
       <Routes>
 
         <Route
@@ -125,6 +128,27 @@ function App() {
             )
           }
         />
+         <Route
+          path='/add-employee'
+          element={
+            currentUser && currentUser.role === 'admin' ? (
+              <AdminAddEmployeePage />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+        
+         <Route
+          path='/delete-employee'
+          element={
+            currentUser && currentUser.role === 'admin' ? (
+              <AdminDeletePage />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
 
 
         <Route
@@ -137,6 +161,7 @@ function App() {
             )
           }
         />
+        
 
 
         <Route path="*" element={<NotFound />} />

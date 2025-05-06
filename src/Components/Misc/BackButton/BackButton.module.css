@@ -1,0 +1,26 @@
+ /* Nút Quay Lại */
+ .backButton {
+    display: inline-flex; 
+    align-items: center;
+    gap: 0.3rem; 
+    background: none;
+    border: none;
+    padding: 0.5rem 1rem; 
+    margin: 0.5rem 0 0 0.5rem; 
+    cursor: pointer;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px; 
+    text-align: center;
+    color: #4B5563; 
+    align-self: flex-start; 
+}
+.backButton svg { 
+    font-size: 1.1rem;
+}
+.backButton:hover {
+    color: #000000;
+}
+

@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import styles from './EmployeeSafetyList.module.css';
-import Header from '../../Common/Header/Header';
+
 import SafetyListTable from './SafetyListTable/SafetyListTable';
 import { FiSearch, FiChevronDown, FiChevronUp } from 'react-icons/fi'; // Icons
 import EmployeeDetailModal from '../../Morals/EmployeeDetailModal/EmployeeDetailModal';
 // --- TEST ---
 import { MOCK_EMPLOYEES } from '../../Misc/DATA/data.js'; 
+import BackButton from '../../Misc/BackButton/BackButton.jsx';
+import { ResetLocation } from '../../Misc/ResetLocation.jsx';
 
-function EmployeeSafetyList({ onLogout }) {
+function EmployeeSafetyList() {
     const [employees, setEmployees] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [statusFilter, setStatusFilter] = useState('all');
@@ -58,7 +60,8 @@ function EmployeeSafetyList({ onLogout }) {
 
     return (
         <div className={styles.page}>
-            <Header showLogout={true} onLogout={onLogout} />
+        <BackButton/>
+        <ResetLocation/>
 
             <main className={styles.mainContent}>
                 <div className={styles.contentContainer}> {/* Container trắng bao ngoài */}
