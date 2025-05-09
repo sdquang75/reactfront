@@ -28,31 +28,32 @@ function LoginPage({ onLoginSuccess }) {
     setIsLoading(true);
 
 
+    try { 
+      const response = await fetch('http://localhost/PHP1/login12.php', { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ emp_no: employeeId, password: password }),
+      });
 
-    const response = await fetch('http://localhost/PHP1/login12.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ emp_no: employeeId, password: password }),
-    });
-    const data = await response.json();
+     
+      const responseData = await response.json(); 
 
-    if (!response.ok) {
-      throw new Error(data.error || 'ERROR');
-    }
+      if (!response.ok) {
+        
+        throw new Error(responseData.error || `HTTP: ${response.status}`);
+      }
 
-    else {
-      const apiResponseData = await response.json();
-
+      
+      // responseData is { emp_no: "...", ename: "...", DPT_NO: "...", role: "..." }
 
       const userDataForApp = {
-        emp_no: apiResponseData.emp_no,
-        name: apiResponseData.ename,
-        role: apiResponseData.role,
-        department_no: apiResponseData.DPT_NO,
-
-        department: `${apiResponseData.DPT_NO}`,
+        emp_no: responseData.emp_no,
+        name: responseData.ename, 
+        role: responseData.role,
+       
+        department: ` ${responseData.DPT_NO}`,
         status: "unknown",
         commute: "unknown",
         injury: "unknown",
@@ -67,75 +68,18 @@ function LoginPage({ onLoginSuccess }) {
         } else {
           navigate('/safetylist', { replace: true });
         }
+      } else {
+        console.error("onLoginSuccess error");
+       
       }
-      // ...
+
+    } catch (err) {
+      console.error('Login request failed:', err);
+      setError(err.message || 'ERROR.');
+    } finally { 
+      setIsLoading(false); 
     }
-    // API ---
-
-
-
-
-
-    // try {
-    // --- 本番ログインAPIを呼び出す ---
-    // const userData = await loginApi(employeeId, password);
-    //--------------------------------
-
-
-
-
-
-    // --- GIẢ LẬP API RESPONSE ĐỂ TEST ---
-    // try {
-    //   TEST
-    // let userData;
-    // if (employeeId === '1' && password === '2') {
-    //   userData = {
-    //     emp_no: employeeId,
-    //     name: "Admin",
-    //     department: "IT",
-    //     role: "admin",
-
-    //   };
-    // } else if (employeeId === '3' && password === '4') {
-    //   userData = {
-    //     emp_no: employeeId,
-    //     name: "User",
-    //     department: "Sales",
-    //     role: "user",
-
-    //   };
-    // } else {
-    //   throw new Error('社員番号またはパスワードが正しくありません。');
-    // }
-    // // --- END TEST ---
-
-
-
-
-    //   APIが成功した場合、App.jsでonLoginSuccessコールバックを呼び出し
-    // if (typeof onLoginSuccess === 'function') {
-    //   onLoginSuccess(userData);
-    //  NAVIGATION
-    //     if (userData.role === 'admin') {
-    //       navigate('/admin');
-    //     } else {
-    //       navigate('/safetylist');
-    //     }
-    //   } else {
-    //    
-    //     // navigate('/some-default-page');
-    //   }
-
-    //   }
-    // } catch (err) {
-    //   console.error('Login failed:', err);
-
-    //   setError(err.message || 'ログイン中にエラーが発生しました。');
-    // }
-    // --- END API ---
   };
-
   return (
     <div className={styles.page}>
 
