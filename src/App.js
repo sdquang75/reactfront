@@ -2,6 +2,9 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+
+
+
 // --- (Pages) ---
 import LoginPage from './Components/Routers/Login/LoginPage';
 import SafetyReportPage from './Components/Routers/SafetyReportPage/SafetyReportPage';
@@ -16,22 +19,25 @@ import Header from './Components/Common/Header/Header';
 import ScrollToTop from './Components/Misc/ScrollOnTop';
 
 function App() {
-  const [currentUser, setCurrentUser] = useState({
-    emp_no: "00193",
-    name: "大野 未来",
-    department: "総務",
-    status: "safe",
-    commute: "テレワーク",
-    injury: "なし",
-    timestamp: "2025-05-01T01:25:12Z",
-    role: "admin",
-  });
-  const [isLoading, setIsLoading] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+  // {
+  //   emp_no: "00193",
+  //   name: "大野 未来",
+  //   department: "総務",
+  //   status: "safe",
+  //   commute: "テレワーク",
+  //   injury: "なし",
+  //   timestamp: "2025-05-01T01:25:12Z",
+  //   role: "admin",
+  // }
+
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
 
-  // --- useEffect Hook ---
- /* useEffect(() => {
+  // --- localStorage を確認するための useEffect フック ---
+  useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       try {
@@ -43,7 +49,7 @@ function App() {
       }
     }
     setIsLoading(false);
-  }, []);*/
+  }, []);
 
 
   const handleLoginSuccess = (userData) => {
@@ -51,7 +57,11 @@ function App() {
     setCurrentUser(userData);
 
     localStorage.setItem('user', JSON.stringify(userData));
-
+    // if (userData.role === 'admin') {
+    //   navigate('/admin');
+    // } else {
+    //   navigate('/safetylist');
+    // }
   };
 
 
@@ -61,19 +71,18 @@ function App() {
     localStorage.removeItem('user');
 
     navigate('/login');
+    // ログアウト後、ログインページへリダイレクトする。
   };
 
 
-  // if (isLoading) {
-  //   return <div className="loading-indicator">Loading...</div>;
-  // }
+
 
 
   return (
     <>
 
-<Header currentUser={currentUser} onLogout={handleLogout} />
-<ScrollToTop/>
+      <Header currentUser={currentUser} onLogout={handleLogout} />
+      <ScrollToTop />
 
       <Routes>
 
@@ -128,7 +137,7 @@ function App() {
             )
           }
         />
-         <Route
+        <Route
           path='/add-employee'
           element={
             currentUser && currentUser.role === 'admin' ? (
@@ -138,8 +147,8 @@ function App() {
             )
           }
         />
-        
-         <Route
+
+        <Route
           path='/delete-employee'
           element={
             currentUser && currentUser.role === 'admin' ? (
@@ -161,7 +170,7 @@ function App() {
             )
           }
         />
-        
+
 
 
         <Route path="*" element={<NotFound />} />

@@ -3,79 +3,142 @@ import styles from './LoginPage.module.css';
 import { useNavigate } from 'react-router-dom';
 
 import { FiEye, FiEyeOff } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+// import { loginApi } from './path/to/your/apiService';
 
-
-function LoginPage() {
+function LoginPage({ onLoginSuccess }) {
   const [employeeId, setEmployeeId] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(true);
 
   const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  
-
-    // On/off password
-    const togglePasswordVisibility = () => {
-      setShowPassword(!showPassword);
-    };
 
 
+  // On/off password
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  // Login
 
-
-
-
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setError(''); 
-    setIsLoading(true); 
-    
-       // API ---
+    setError('');
+    setIsLoading(true);
 
-    
+
+
+    const response = await fetch('http://localhost/PHP1/login12.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ emp_no: employeeId, password: password }),
+    });
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || 'ERROR');
+    }
+
+    else {
+      const apiResponseData = await response.json();
+
+
+      const userDataForApp = {
+        emp_no: apiResponseData.emp_no,
+        name: apiResponseData.ename,
+        role: apiResponseData.role,
+        department_no: apiResponseData.DPT_NO,
+
+        department: `${apiResponseData.DPT_NO}`,
+        status: "unknown",
+        commute: "unknown",
+        injury: "unknown",
+        timestamp: new Date().toISOString(),
+      };
+
+      if (typeof onLoginSuccess === 'function') {
+        onLoginSuccess(userDataForApp);
+        // NAVIGATION
+        if (userDataForApp.role === 'admin') {
+          navigate('/admin', { replace: true });
+        } else {
+          navigate('/safetylist', { replace: true });
+        }
+      }
+      // ...
+    }
+    // API ---
+
+
+
+
+
     // try {
-    //   // Giả sử API trả về thông tin user nếu thành công
-    //   // const userData = await loginApi(employeeId, password);
+    // --- 本番ログインAPIを呼び出す ---
+    // const userData = await loginApi(employeeId, password);
+    //--------------------------------
 
-    //   // --- Giả lập thành công ---
-    //   let userData;
-    //   if (employeeId === 'admin' && password === 'adminpass') {
-    //     userData = { name: 'Admin User', employeeId: employeeId, role: 'admin' };
-    //   } else if (employeeId === 'user' && password === 'userpass') {
-    //     userData = { name: 'Normal User', employeeId: employeeId, role: 'user' };
-    //   } else {
-    //     // --- Giả lập thất bại ---
-    //     throw new Error('社員番号またはパスワードが正しくありません。'); // ID hoặc mật khẩu không đúng
-    //   }
 
-    //   // Nếu API thành công, gọi callback onLoginSuccess ở App.js
-    //   if (typeof onLoginSuccess === 'function') {
-    //     onLoginSuccess(userData);
-    //     // Chuyển hướng dựa vào role (logic này có thể đặt ở App.js hoặc ở đây)
+
+
+
+    // --- GIẢ LẬP API RESPONSE ĐỂ TEST ---
+    // try {
+    //   TEST
+    // let userData;
+    // if (employeeId === '1' && password === '2') {
+    //   userData = {
+    //     emp_no: employeeId,
+    //     name: "Admin",
+    //     department: "IT",
+    //     role: "admin",
+
+    //   };
+    // } else if (employeeId === '3' && password === '4') {
+    //   userData = {
+    //     emp_no: employeeId,
+    //     name: "User",
+    //     department: "Sales",
+    //     role: "user",
+
+    //   };
+    // } else {
+    //   throw new Error('社員番号またはパスワードが正しくありません。');
+    // }
+    // // --- END TEST ---
+
+
+
+
+    //   APIが成功した場合、App.jsでonLoginSuccessコールバックを呼び出し
+    // if (typeof onLoginSuccess === 'function') {
+    //   onLoginSuccess(userData);
+    //  NAVIGATION
     //     if (userData.role === 'admin') {
     //       navigate('/admin');
     //     } else {
-    //       navigate('/safetylist'); // Hoặc trang user mặc định
+    //       navigate('/safetylist');
     //     }
     //   } else {
-    //     console.error("onLoginSuccess is not a function. Cannot update App state.");
-    //     // Có thể chuyển hướng tạm thời ở đây nếu cần
+    //    
     //     // navigate('/some-default-page');
     //   }
 
+    //   }
     // } catch (err) {
     //   console.error('Login failed:', err);
-    //   // Hiển thị lỗi cho người dùng
-    //   setError(err.message || 'ログイン中にエラーが発生しました。'); // Có lỗi xảy ra khi đăng nhập
+
+    //   setError(err.message || 'ログイン中にエラーが発生しました。');
     // }
-    // --- KẾT THÚC PHẦN TODO API ---
+    // --- END API ---
   };
 
   return (
     <div className={styles.page}>
-    
+
 
       <main className={styles.mainContent}>
         {/* Title o ben ngoai con */}
@@ -107,29 +170,29 @@ function LoginPage() {
                 パスワード
               </label>
               <input
-                 type={showPassword ? 'password' : 'text'}
+                type={showPassword ? 'password' : 'text'}
                 id="password"
                 className={styles.input}
                 placeholder=""
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                
+
               />  {password.length > 0 && (<button
-              type="button" // Quan trọng
-              onClick={togglePasswordVisibility}
-              className={styles.passwordToggle}
-              aria-label={showPassword ? "Hide password" : "Show password"}
-            >
-              {/* Hiển thị icon tương ứng */}
-              {showPassword ? <FiEyeOff /> : <FiEye />}
-            </button>  )}
-              
+                type="button" // Quan trọng
+                onClick={togglePasswordVisibility}
+                className={styles.passwordToggle}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {/* Hiển thị icon tương ứng */}
+                {showPassword ? <FiEyeOff /> : <FiEye />}
+              </button>)}
+
             </div>
-            <Link to="/safety">
-              <button type="submit" className={styles.button}>
-                ログイン
-              </button></Link>
+            {/* <Link to="/safety">
+            */}<button type="submit" className={styles.button}>
+              ログイン
+            </button>{/* </Link> */}
           </form>
         </div>
       </main>
