@@ -90,7 +90,7 @@ function App() {
           path="/login"
           element={
             currentUser ? (
-              <Navigate to={currentUser.role === 'admin' ? '/admin' : '/safetylist'} replace />
+              <Navigate to={currentUser.role === 'admin' ? '/admin' : '/safety'} replace />
             ) : (
 
               <LoginPage onLoginSuccess={handleLoginSuccess} />

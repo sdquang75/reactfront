@@ -66,7 +66,7 @@ function LoginPage({ onLoginSuccess }) {
         if (userDataForApp.role === 'admin') {
           navigate('/admin', { replace: true });
         } else {
-          navigate('/safetylist', { replace: true });
+          navigate('/safety', { replace: true });
         }
       } else {
         console.error("onLoginSuccess error");
