@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './SafetyListItem.module.css';
-import StatusBadge from '../../../Common/StatusBadge/StatusBadge'; // Import badge
-import { FiInfo } from 'react-icons/fi'; // Icon chi tiết ví dụ
+import StatusBadge from '../../../Common/StatusBadge/StatusBadge'; 
+import { FiInfo } from 'react-icons/fi'; 
 
 
 
@@ -10,10 +10,9 @@ function SafetyListItem({ employee, onViewDetails }) {
       return null;
     }
   
-    // Hàm xử lý khi click nút chi tiết
     const handleDetailButtonClick = () => {
-      // Gọi hàm onViewDetails được truyền từ cha, gửi toàn bộ object employee
-      if (onViewDetails) { // Kiểm tra xem prop có tồn tại không
+      
+      if (onViewDetails) { 
           onViewDetails(employee);
       } else {
           

@@ -2,112 +2,68 @@ import React, { useState } from 'react';
 import styles from './SafetyReportPage.module.css';
 import ConfirmationModal from '../../Morals/ConfirmationModal';
 import BackButton from '../../Misc/BackButton/BackButton';
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-// Giả sử App.js truyền prop 'currentUser'
-function SafetyReportPage({ currentUser, onLogout }) {
-  const location = useLocation();
-  const navigate = useNavigate();
 
-  const isFirstPage = location.state?.isFirstPageAfterLogin;
+
+
+
+function SafetyReportPage({ onLogout }) {
   const [safetyStatus, setSafetyStatus] = useState('');
-  const [attendanceStatus, setAttendanceStatus] = useState(''); // Ví dụ: "出社可能" hoặc "出社不可能"
-  const [injuryStatus, setInjuryStatus] = useState('');       // Ví dụ: "怪我はない", "軽傷", "重傷"
+  const [attendanceStatus, setAttendanceStatus] = useState('');
+  const [injuryStatus, setInjuryStatus] = useState('');
 
+  // State  modal
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [apiMessage, setApiMessage] = useState({ type: '', text: '' });
 
   const handleRadioChange = (setter) => (event) => {
     setter(event.target.value);
-    setApiMessage({ type: '', text: '' });
   };
 
+  // Open moral
   const handleOpenConfirmation = (event) => {
     event.preventDefault();
-    setApiMessage({ type: '', text: '' }); // Reset
+    // check radio
     if (safetyStatus && attendanceStatus && injuryStatus) {
-      setIsModalOpen(true);
+      setIsModalOpen(true); // Open Moral
     } else {
-      // setApiMessage({ type: 'error', text: '全ての項目を選択してください。' });
+
     }
   };
 
+  // Hàm đóng modal
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
-  const handleConfirmSubmit = async () => {
-    setIsLoading(true);
+  // Hàm xử lý submit 
+  const handleConfirmSubmit = () => {
+
+    // Logic  API koko 
+
+    //  đóng modal
     setIsModalOpen(false);
 
-    if (!currentUser || !currentUser.emp_no) {
-      // setApiMessage({ type: 'error', text: 'ユーザー情報が見つかりません。再度ログインしてください。' });
-      setIsLoading(false);
-      return;
-    }
-
-    const reportData = {
-      emp_no: currentUser.emp_no,
-      status: safetyStatus,
-      commute: attendanceStatus,
-      injury: injuryStatus,
-    };
-
-    try {
-
-      const response = await fetch('http://localhost/PHP1/safety_status_check.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(reportData),
-      });
-
-      console.log('Response Status:', response.status);
-      console.log('Response Content-Type:', response.headers.get('Content-Type'));
-
-      const responseData = await response.json();
-      console.log('Response Data from PHP:', responseData);
-
-      if (!response.ok || !responseData.result) {
-        console.log(responseData.error || `サーバーエラーが発生しました (HTTP ${response.status})`);
-      }
-      if (!responseData.result) {
-        console.log(responseData.error || 'サーバー側で処理が失敗しました。');
-      }
-
-      // setApiMessage({ type: 'success', text: responseData.message || '報告が正常に送信されました。' });
-
-      if (currentUser.role === 'admin') {
-        navigate('/admin', { replace: true });
-      } else {
-        navigate('/safetylist', { replace: true });
-      }
-    } catch (error) {
-      console.error("Submit Safety Report Error:", error);
-      // setApiMessage({ type: 'error', text: error.message || '報告の送信中に予期せぬエラーが発生しました。' });
-    } finally {
-      setIsLoading(false);
-    }
   };
 
   return (
     <div className={styles.page}>
-      {/* {!isFirstPage && <BackButton />} */}
+      <BackButton/>
+
       <main className={styles.mainContent}>
         <div className={styles.formContainer}>
           <h2 className={styles.title}>安否登録</h2>
-          <p className={styles.subtitle}>安否情報を選択してください</p>
+          <p className={styles.subtitle}>
+            安否情報を選択してください
+          </p>
 
-          {apiMessage.text && (
-            <div className={`${styles.apiMessage} ${apiMessage.type === 'error' ? styles.error : styles.success}`}>
-              {apiMessage.text}
-            </div>
-          )}
 
           <form onSubmit={handleOpenConfirmation} className={styles.form}>
+            {/* Thay đổi onSubmit thành handleOpenConfirmation */}
+            {/* <form onSubmit={onSubmit} className={styles.form}> */}
 
+
+
+
+            {/* --- Nhóm Tình trạng An toàn --- */}
             <fieldset className={styles.radioGroup}>
               <legend className={styles.groupLabel}>安否状況</legend>
               <div className={styles.radioOptionsContainer}>
@@ -122,7 +78,7 @@ function SafetyReportPage({ currentUser, onLogout }) {
               </div>
             </fieldset>
 
-
+            {/* --- Nhóm Tình trạng Đi làm --- */}
             <fieldset className={styles.radioGroup}>
               <legend className={styles.groupLabel}>出社状況</legend>
               <div className={styles.radioOptionsContainer}>
@@ -137,7 +93,7 @@ function SafetyReportPage({ currentUser, onLogout }) {
               </div>
             </fieldset>
 
-
+            {/* --- Nhóm Tình trạng Thương tích --- */}
             <fieldset className={styles.radioGroup}>
               <legend className={styles.groupLabel}>怪我の状況</legend>
               <div className={styles.radioOptionsContainer}>
@@ -156,22 +112,21 @@ function SafetyReportPage({ currentUser, onLogout }) {
               </div>
             </fieldset>
 
-            <button type="submit" className={styles.submitButton} disabled={isLoading}>
-              {isLoading ? '処理中...' : '登録'}
+            <button type="submit" className={styles.submitButton} >
+
+              {/* <button type="submit" className={styles.onSubmit}> */}
+              登録
             </button>
           </form>
         </div>
       </main>
 
+      {/* Render Modal */}
       <ConfirmationModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         onConfirm={handleConfirmSubmit}
-        data={{
-          '安否状況': safetyStatus,
-          '出社状況': attendanceStatus,
-          '怪我の状況': injuryStatus
-        }}
+        data={{ safetyStatus, attendanceStatus, injuryStatus }}
       />
     </div>
   );

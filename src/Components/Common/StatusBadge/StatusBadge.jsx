@@ -3,10 +3,9 @@ import styles from './StatusBadge.module.css';
 
 
 const statusMap = {
-  safe: { text: '安全', className: styles.safe },
-  danger: { text: '危険', className: styles.danger },
-  unanswered: { text: '未登録', className: styles.unanswered },
- 
+  '安全': { text: '安全', className: styles.safe },
+  '危険': { text: '危険', className: styles.danger },
+  '未登録': { text: '未登録', className: styles.unanswered },
 };
 
 function StatusBadge({ status }) {

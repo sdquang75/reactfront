@@ -1,0 +1,171 @@
+import React, { useState, useEffect, useMemo } from 'react';
+import styles from './EmployeeSafetyList.module.css';
+
+import SafetyListTable from './SafetyListTable/SafetyListTable';
+import { FiSearch, FiChevronDown, FiChevronUp } from 'react-icons/fi'; // Icons
+import EmployeeDetailModal from '../../Morals/EmployeeDetailModal/EmployeeDetailModal';
+// import { MOCK_EMPLOYEES } from '../../Misc/DATA/data.js'; // --- LOẠI BỎ DÒNG NÀY ---
+import BackButton from '../../Misc/BackButton/BackButton.jsx';
+import { ResetLocation } from '../../Misc/ResetLocation.jsx';
+
+function EmployeeSafetyList() {
+    const [employees, setEmployees] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [statusFilter, setStatusFilter] = useState('all');
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [loading, setLoading] = useState(true); // Thêm state cho trạng thái tải dữ liệu
+    const [error, setError] = useState(null); // Thêm state cho lỗi
+
+    // --- State cho Modal ---
+    const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+    const [selectedEmployeeData, setSelectedEmployeeData] = useState(null);
+
+    useEffect(() => {
+        // --- THAY THẾ PHẦN NÀY ---
+        // setEmployees(MOCK_EMPLOYEES);
+
+        // Hàm để gọi API
+        const fetchEmployees = async () => {
+            setLoading(true);
+            setError(null);
+            try {
+                // Thay 'YOUR_API_BASE_URL' bằng URL thực tế của API PHP của bạn
+                // Và thay 'D001' bằng giá trị dpt_no bạn muốn truy vấn
+                const departmentNumber = '10001'; // Ví dụ: mã bộ phận
+                const response = await fetch(`http://localhost/PHP1/employee_data_sheet.php?dpt_no=${departmentNumber}`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+
+                if (data.error) { // Xử lý lỗi từ phía API (ví dụ: DB接続失敗)
+                    throw new Error(data.error);
+                }
+                if (data.message) { // Xử lý trường hợp không có dữ liệu
+                    setEmployees([]); // Đặt danh sách nhân viên thành rỗng
+                    console.log(data.message); // Hoặc hiển thị thông báo cho người dùng
+                } else {
+                    setEmployees(data);
+                }
+
+            } catch (e) {
+                console.error("Không thể fetch dữ liệu nhân viên:", e);
+                setError(e.message); // Lưu thông báo lỗi
+                setEmployees([]); // Đặt danh sách nhân viên thành rỗng khi có lỗi
+            } finally {
+                setLoading(false); // Dừng trạng thái tải
+            }
+        };
+
+        fetchEmployees();
+        // --- KẾT THÚC PHẦN THAY THẾ ---
+    }, []); // useEffect sẽ chạy một lần khi component được mount
+
+    const filteredEmployees = useMemo(() => {
+        return employees.filter(emp => {
+            const statusMatch = statusFilter === 'all' || emp.status === statusFilter;
+            const term = searchTerm.toLowerCase();
+            // API trả về emp_no và name (không phải id)
+            const searchMatch = !term ||
+                (emp.emp_no && emp.emp_no.toLowerCase().includes(term)) ||
+                (emp.name && emp.name.toLowerCase().includes(term));
+            return statusMatch && searchMatch;
+        });
+    }, [employees, searchTerm, statusFilter]);
+
+    const handleSearchChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
+    const handleFilterChange = (event) => {
+        setStatusFilter(event.target.value);
+    };
+
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
+    const handleViewDetails = (employee) => {
+        setSelectedEmployeeData(employee);
+        setIsDetailModalOpen(true);
+    };
+
+    const handleCloseDetailModal = () => {
+        setIsDetailModalOpen(false);
+        setSelectedEmployeeData(null);
+    };
+
+    // Hiển thị thông báo tải hoặc lỗi (tùy chọn)
+    if (loading) {
+        // return <div className={styles.loadingMessage}>Đang tải dữ liệu nhân viên...</div>;
+    }
+
+    if (error) {
+        // return <div className={styles.errorMessage}>Lỗi: {error}</div>;
+    }
+
+    return (
+        <div className={styles.page}>
+            <BackButton />
+            <ResetLocation />
+
+            <main className={styles.mainContent}>
+                <div className={styles.contentContainer}>
+                    <h2 className={styles.pageTitle}>安否一覧</h2>
+
+                    <div className={styles.filters}>
+                        <div className={styles.filterGroup}>
+                            <label htmlFor="search" className={styles.filterLabel}>検索</label>
+                            <div className={styles.searchInputWrapper}>
+                                <FiSearch className={styles.searchIcon} />
+                                <input
+                                    type="text"
+                                    id="search"
+                                    placeholder="社員番号または氏名で検索"
+                                    className={styles.searchInput}
+                                    value={searchTerm}
+                                    onChange={handleSearchChange}
+                                />
+                            </div>
+                        </div>
+
+                        <div className={styles.filterGroup}>
+                            <label htmlFor="statusFilter" className={styles.filterLabel}>安否状況</label>
+                            <div className={styles.selectWrapper} onClick={toggleDropdown}>
+                                <select
+                                    id="statusFilter"
+                                    className={styles.selectInput}
+                                    value={statusFilter}
+                                    onChange={handleFilterChange}
+                                >
+                                    <option value="all">全て表示</option>
+                                    <option value="safe">安全</option>
+                                    <option value="danger">危険</option>
+                                    <option value="unanswered">未登録</option>
+                                </select>
+                                {isDropdownOpen ? (<FiChevronUp className={styles.selectArrow} />) : (<FiChevronDown className={styles.selectArrow} />)}
+                            </div>
+                        </div>
+                    </div>
+                    {/* Hiển thị thông báo tải hoặc lỗi ngay trên bảng */}
+                    {loading && <div className={styles.tableMessage}>Đang tải dữ liệu...</div>}
+                    {error && !loading && <div className={styles.tableMessage}>Không thể tải dữ liệu: {error}. Vui lòng thử lại sau.</div>}
+                    {!loading && !error && employees.length === 0 && <div className={styles.tableMessage}>Không có dữ liệu nhân viên cho bộ phận này.</div>}
+                    
+                    {!loading && !error && employees.length > 0 && (
+                        <SafetyListTable employees={filteredEmployees} onViewDetails={handleViewDetails} />
+                    )}
+
+                </div>
+            </main>
+            <EmployeeDetailModal
+                isOpen={isDetailModalOpen}
+                onClose={handleCloseDetailModal}
+                employeeData={selectedEmployeeData}
+            />
+        </div>
+    );
+}
+
+export default EmployeeSafetyList;

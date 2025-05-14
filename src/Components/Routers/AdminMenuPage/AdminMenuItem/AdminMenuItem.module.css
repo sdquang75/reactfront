@@ -5,12 +5,12 @@
   padding: 1.25rem 1.5rem;
   box-sizing: border-box;
   width: 100%;
-  /* Chiếm hết chiều rộng container cha */
+
   font-family: 'Inter', sans-serif;
-  /* Font */
+
   display: flex;
   flex-direction: column;
-  /* Xếp các phần tử theo cột */
+
 }
 
 .title {
@@ -18,9 +18,9 @@
   font-weight: 600;
   color: #000000;
   margin: 0 0 0.5rem 0;
-  /* Khoảng cách dưới title */
+
   line-height: 24px;
-  /* spec */
+
 }
 
 .description {
@@ -29,32 +29,32 @@
   color: #4B5563;
   line-height: 17px;
   margin: 0 0 1.5rem 0;
-  /* Khoảng cách dưới description, trước button */
+
   flex-grow: 1;
-  /* Đẩy button xuống dưới nếu card có chiều cao cố định  */
+
 }
 
 .actionButton {
   width: 100%;
-  /* Button chiếm hết chiều rộng card */
+
   padding: 0.7rem 1rem;
-  /* Padding  button  */
+
   border: none;
   border-radius: 6px;
-  /* spec */
+
   font-size: 14px;
   font-weight: 500;
   line-height: 17px;
-  /* spec */
+
   text-align: center;
   color: #FFFFFF;
   cursor: pointer;
   transition: background-color 0.15s ease-in-out;
   margin-top: auto;
-  /* Đảm bảo button luôn ở dưới cùng nếu card có flex-grow */
+
 }
 
-/* Variant primary */
+
 .primary {
   background: #18181B;
 }
@@ -63,22 +63,22 @@
   background-color: #343a40;
 }
 
-/* Variant danger */
+
 .danger {
   background: #EF4444;
-  /* spec */
+
 }
 
 .danger:hover {
   background-color: #DC2626;
-  /* Màu đỏ đậm hơn khi hover */
+
 }
 
-/* Responsive  */
+
 @media (min-width: 768px) {
   .card {
     padding: 1.5rem 2rem;
   }
 
-  /* Có thể giữ layout các card xếp dọc hoặc chuyển sang grid 2 cột */
+
 }

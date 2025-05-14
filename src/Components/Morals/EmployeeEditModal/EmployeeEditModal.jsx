@@ -1,51 +1,46 @@
 import React, { useState, useEffect } from 'react';
-import styles from './EmployeeEditModal.module.css'; // 
-import { FiX } from 'react-icons/fi'; // 
+import styles from './EmployeeEditModal.module.css';
+import { FiX } from 'react-icons/fi';
 
 function EmployeeEditModal({ isOpen, onClose, onSave, initialData }) {
   // --- State nội bộ cho các giá trị đang được sửa ---
-  // Khởi tạo state từ initialData được truyền vào
-  const [currentSafetyStatus, setCurrentSafetyStatus] = useState('');
-  const [currentAttendanceStatus, setCurrentAttendanceStatus] = useState('');
-  const [currentInjuryStatus, setCurrentInjuryStatus] = useState('');
 
-  // --- useEffect để cập nhật state nội bộ khi initialData thay đổi (khi modal mở) ---
+  const [currentStatus, setcurrentStatus] = useState('');
+  const [currentCommute, setcurrentCommute] = useState('');
+  const [currentInjury, setcurrentInjury] = useState('');
+
+  // --- khi modal mở ---
   useEffect(() => {
-    // Chỉ cập nhật khi modal được mở và có initialData
+
     if (isOpen && initialData) {
-      setCurrentSafetyStatus(initialData.safetyStatus || ''); // Dùng key nội bộ
-      setCurrentAttendanceStatus(initialData.attendanceStatus || '');
-      setCurrentInjuryStatus(initialData.injuryStatus || '');
+      setcurrentStatus(initialData.status || '');
+      setcurrentCommute(initialData.commute || '');
+      setcurrentInjury(initialData.injury || '');
     }
-    // Không reset state khi đóng (isOpen=false) để giữ giá trị nếu mở lại nhanh
-    // Nếu muốn reset, thêm điều kiện if (!isOpen) { ...reset state... }
-  }, [isOpen, initialData]); // Chạy lại khi isOpen hoặc initialData thay đổi
 
-  // --- Hàm xử lý thay đổi Radio Button ---
+  }, [isOpen, initialData]);
+
+
   const handleRadioChange = (setter) => (event) => {
-    setter(event.target.value); // Cập nhật state nội bộ của modal
+    setter(event.target.value);
   };
 
-  // --- Hàm xử lý khi nhấn nút Lưu ---
+  // ---  Lưu ---
   const handleSubmit = (event) => {
-    event.preventDefault(); // Ngăn submit form mặc định
+    event.preventDefault();
 
-    // Tạo object chứa dữ liệu đã sửa đổi
+
     const updatedData = {
-      safetyStatus: currentSafetyStatus,
-      attendanceStatus: currentAttendanceStatus,
-      injuryStatus: currentInjuryStatus,
+      status: currentStatus,
+      commute: currentCommute,
+      injury: currentInjury,
     };
+    console.log("EmployeeEditModal handleSubmit, updatedData:", updatedData);
+    onSave(updatedData);
 
-    // Gọi hàm onSave được truyền từ component cha, kèm theo dữ liệu mới
-    console.log("Saving edited data:", updatedData);
-    onSave(updatedData); // Hàm này sẽ xử lý việc gọi API và cập nhật state ở component cha
-
-    // onClose(); // Component cha sẽ quyết định có đóng modal sau khi lưu hay không
-    // thường là có, nên có thể gọi onClose() trong hàm onSave ở component cha
   };
 
-  // Không render gì nếu modal không mở
+
   if (!isOpen) {
     return null;
   }
@@ -76,11 +71,11 @@ function EmployeeEditModal({ isOpen, onClose, onSave, initialData }) {
               <div className={styles.radioOption}>
                 <input
                   type="radio"
-                  id="edit-statusSafe" // Id cần khác với trang report gốc
-                  name="editSafetyStatus" // Name cần khác
-                  value="safe" // Dùng key nội bộ
-                  checked={currentSafetyStatus === 'safe'} // So sánh với state nội bộ
-                  onChange={handleRadioChange(setCurrentSafetyStatus)} // Cập nhật state nội bộ
+                  id="edit-statusSafe"
+                  name="editSafetyStatus"
+                  value="安全"
+                  checked={currentStatus === '安全'}
+                  onChange={handleRadioChange(setcurrentStatus)}
                   className={styles.radioInput}
                   required
                 />
@@ -91,9 +86,9 @@ function EmployeeEditModal({ isOpen, onClose, onSave, initialData }) {
                   type="radio"
                   id="edit-statusDanger"
                   name="editSafetyStatus"
-                  value="danger"
-                  checked={currentSafetyStatus === 'danger'}
-                  onChange={handleRadioChange(setCurrentSafetyStatus)}
+                  value="危険"
+                  checked={currentStatus === '危険'}
+                  onChange={handleRadioChange(setcurrentStatus)}
                   className={styles.radioInput}
                   required
                 />
@@ -112,9 +107,9 @@ function EmployeeEditModal({ isOpen, onClose, onSave, initialData }) {
                   type="radio"
                   id="edit-attendancePossible"
                   name="editAttendanceStatus"
-                  value="possible"
-                  checked={currentAttendanceStatus === 'possible'}
-                  onChange={handleRadioChange(setCurrentAttendanceStatus)}
+                  value="出社可能"
+                  checked={currentCommute === '出社可能'}
+                  onChange={handleRadioChange(setcurrentCommute)}
                   className={styles.radioInput}
                   required
                 />
@@ -125,9 +120,9 @@ function EmployeeEditModal({ isOpen, onClose, onSave, initialData }) {
                   type="radio"
                   id="edit-attendanceImpossible"
                   name="editAttendanceStatus"
-                  value="impossible"
-                  checked={currentAttendanceStatus === 'impossible'}
-                  onChange={handleRadioChange(setCurrentAttendanceStatus)}
+                  value="出社不可能"
+                  checked={currentCommute === '出社不可能'}
+                  onChange={handleRadioChange(setcurrentCommute)}
                   className={styles.radioInput}
                   required
                 />
@@ -149,9 +144,9 @@ function EmployeeEditModal({ isOpen, onClose, onSave, initialData }) {
                   type="radio"
                   id="edit-injuryNone"
                   name="editInjuryStatus"
-                  value="none"
-                  checked={currentInjuryStatus === 'none'}
-                  onChange={handleRadioChange(setCurrentInjuryStatus)}
+                  value="怪我はない"
+                  checked={currentInjury === '怪我はない'}
+                  onChange={handleRadioChange(setcurrentInjury)}
                   className={styles.radioInput}
                   required
                 />
@@ -162,9 +157,9 @@ function EmployeeEditModal({ isOpen, onClose, onSave, initialData }) {
                   type="radio"
                   id="edit-injuryMinor"
                   name="editInjuryStatus"
-                  value="minor"
-                  checked={currentInjuryStatus === 'minor'}
-                  onChange={handleRadioChange(setCurrentInjuryStatus)}
+                  value="軽傷"
+                  checked={currentInjury === '軽傷'}
+                  onChange={handleRadioChange(setcurrentInjury)}
                   className={styles.radioInput}
                   required
                 />
@@ -175,9 +170,9 @@ function EmployeeEditModal({ isOpen, onClose, onSave, initialData }) {
                   type="radio"
                   id="edit-injurySerious"
                   name="editInjuryStatus"
-                  value="serious"
-                  checked={currentInjuryStatus === 'serious'}
-                  onChange={handleRadioChange(setCurrentInjuryStatus)}
+                  value="重傷"
+                  checked={currentInjury === '重傷'}
+                  onChange={handleRadioChange(setcurrentInjury)}
                   className={styles.radioInput}
                   required
                 />

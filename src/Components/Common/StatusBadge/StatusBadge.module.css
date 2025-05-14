@@ -15,8 +15,16 @@
     background: #DCFCE6;
     color: #166434;
   }
-  
+  .安全 {
+    background: #DCFCE6;
+    color: #166434;
+  }
   .danger {
+    background: #FDE2E1;
+    color: #981B1B;
+  }
+
+  .危険  {
     background: #FDE2E1;
     color: #981B1B;
   }

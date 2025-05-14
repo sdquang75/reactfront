@@ -1,15 +1,15 @@
 import React from 'react';
 import styles from './AdminMenuItem.module.css';
 
-// Component này nhận props để hiển thị nội dung và xử lý hành động
+
 function AdminMenuItem({ title, description, buttonText, buttonVariant = 'primary', onClick }) {
 
-  // Xác định class cho button dựa trên variant
+
   let buttonClass = styles.actionButton;
   if (buttonVariant === 'danger') {
-    buttonClass += ` ${styles.danger}`; // Thêm class danger nếu variant là 'danger'
+    buttonClass += ` ${styles.danger}`;
   } else {
-    buttonClass += ` ${styles.primary}`; // Mặc định là primary
+    buttonClass += ` ${styles.primary}`;
   }
 
   return (
@@ -18,9 +18,9 @@ function AdminMenuItem({ title, description, buttonText, buttonVariant = 'primar
       <p className={styles.description}>{description}</p>
 
       <button
-        type="button" // Là button thường, không submit form
+        type="button"
         className={buttonClass}
-        onClick={onClick} // Gọi hàm được truyền từ component cha
+        onClick={onClick}
       >
         {buttonText}
       </button>

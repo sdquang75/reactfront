@@ -6,15 +6,15 @@ import { Link } from 'react-router-dom';
 
 function ConfirmationModal({ isOpen, onClose, onConfirm, data }) {
   if (!isOpen) {
-    return null; // Không render gì nếu modal không mở
+    return null;
   }
 
   return (
-    // Lớp phủ mờ toàn màn hình
-    <div className={styles.overlay} onClick={onClose}> {/* Click bên ngoài để đóng */}
-      {/* Ngăn việc click vào modal box cũng trigger onClose của overlay */}
+
+    <div className={styles.overlay} onClick={onClose}>
+
       <div className={styles.modalBox} onClick={(e) => e.stopPropagation()}>
-        {/* Nút đóng 'X' */}
+
         <button onClick={onClose} className={styles.closeButton}>×</button>
 
         <h2 className={styles.title}>入力内容の確認</h2>
@@ -25,9 +25,9 @@ function ConfirmationModal({ isOpen, onClose, onConfirm, data }) {
 
 
 
-  {/* ///////////////////////////////////////////// */}
-        {/* Phần hiển thị thông tin xác nhận */}
-        <div className={styles.confirmationData}>
+        {/* ///////////////////////////////////////////// */}
+
+        {/* <div className={styles.confirmationData}>
           <div className={styles.dataRow}>
             <span className={styles.dataLabel}>【安否状況】</span>
             <span className={styles.dataValue}>
@@ -46,12 +46,22 @@ function ConfirmationModal({ isOpen, onClose, onConfirm, data }) {
               {('injuryStatus', data?.injuryStatus)}
             </span>
           </div>
+        </div> */}
+
+        <div className={styles.confirmationData}>
+
+          {data && Object.entries(data).map(([key, value]) => (
+            <div className={styles.dataRow} key={key}>
+              <span className={styles.dataLabel}>【{key}】</span>
+              <span className={styles.dataValue}>{value || '未選択'}</span>
+            </div>
+          ))}
         </div>
 
-        <Link to="/safetylist">
-          <button onClick={onConfirm} className={styles.confirmButton}>
-            登録する
-          </button></Link>
+
+        <button onClick={onConfirm} className={styles.confirmButton}>
+          登録する
+        </button>
         <button onClick={onClose} className={styles.backButton}>
           戻る
         </button>
