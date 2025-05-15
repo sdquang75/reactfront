@@ -7,7 +7,7 @@ import AdminEmployeeEditModal from '../../Morals/AdminEmployeeEditModal/AdminEmp
 import AdminEmployeeDetailModal from '../../Morals/AdminEmployeeDetailModal/AdminEmployeeDetailModal';
 
 
-import BackButton from '../../Misc/BackButton/BackButton.jsx';
+
 
 
 function AdminEmployeeListPage({ currentUser, onCurrentUserProfileUpdate }) {
@@ -45,24 +45,27 @@ function AdminEmployeeListPage({ currentUser, onCurrentUserProfileUpdate }) {
     setIsEditModalOpen(false);
     setEmployeeToEdit(null);
   };
-
-  const handleAdminEmployeeUpdate = (updatedEmployeeDataFromApi) => {
+  const handleAdminEmployeeHardDeleted = (deletedEmpNo) => {
+    console.log('AdminListPage: Employee HARD DELETED, emp_no:', deletedEmpNo);
+    fetchAdminPageData();
+    if (selectedEmployeeData && String(selectedEmployeeData.emp_no) === String(deletedEmpNo)) {
+      setSelectedEmployeeData(null);
+      setIsDetailModalOpen(false);
+    }
+  };
+  const handleAdminEmployeeUpdate = async (updatedEmployeeDataFromApi) => {
     console.log('AdminListPage: Employee data updated by admin:', updatedEmployeeDataFromApi);
     // 
-    fetchAdminPageData();
-    setEmployees(prevEmployees =>
-      prevEmployees.map(emp =>
-        emp.emp_no === updatedEmployeeDataFromApi.emp_no
-          ? { ...emp, ...updatedEmployeeDataFromApi }
-          : emp
-      )
-    );
+
+    setIsEditModalOpen(false);
+    await fetchAdminPageData
+    ;
 
 
     if (selectedEmployeeData && selectedEmployeeData.emp_no === updatedEmployeeDataFromApi.emp_no) {
-      setSelectedEmployeeData(prevSelected => ({
+      fetchAdminPageData(); setSelectedEmployeeData(prevSelected => ({
         ...prevSelected,
-        ...updatedEmployeeDataFromApi
+        ...updatedEmployeeDataFromApi // Ghi đè với dữ liệu từ API update
       }));
 
     } if (currentUser && currentUser.emp_no === updatedEmployeeDataFromApi.emp_no && typeof onCurrentUserProfileUpdate === 'function') {
@@ -96,13 +99,29 @@ function AdminEmployeeListPage({ currentUser, onCurrentUserProfileUpdate }) {
         throw new Error(data.error);
       }
 
+  const newEmployeesList = data.employees || [];
+    setEmployees(newEmployeesList); // Cập nhật danh sách nhân viên tổng thể
 
-      setEmployees(data.employees || []);
+    // QUAN TRỌNG: Cập nhật selectedEmployeeData nếu DetailModal đang mở
+    if (selectedEmployeeData && isDetailModalOpen) {
+      const refreshedSelectedEmployee = newEmployeesList.find(
+        emp => String(emp.emp_no) === String(selectedEmployeeData.emp_no)
+      );
 
+      if (refreshedSelectedEmployee) {
+        console.log('AdminListPage: Refreshing selectedEmployeeData in DetailModal. New data:', refreshedSelectedEmployee);
+        // ĐẢM BẢO DỮ LIỆU MỚI (BAO GỒM PASSWORD) ĐƯỢC ĐẶT VÀO SELECTEDEMPLOYEEDATA
+        setSelectedEmployeeData(refreshedSelectedEmployee); 
+      } else {
+        console.log('AdminListPage: Selected employee not found in new list after fetch, closing DetailModal.');
+        setSelectedEmployeeData(null);
+        setIsDetailModalOpen(false);
+      }
+    }
 
       const deptsFromApi = data.departments || [];
       setAllDepartments([{ dpt_no: 'all', department_name: '全て表示' }, ...deptsFromApi]);
-      setDepartmentOptionsForFilter(['全て表示', ...deptsFromApi.map(d => d.dpname )]);
+      setDepartmentOptionsForFilter(['全て表示', ...deptsFromApi.map(d => d.dpname)]);
 
     } catch (err) {
       console.error("Failed to fetch admin page data:", err);
@@ -208,6 +227,12 @@ function AdminEmployeeListPage({ currentUser, onCurrentUserProfileUpdate }) {
         employeeData={selectedEmployeeData}
         currentUser={currentUser}
         onEditEmployee={handleOpenAdminEditModal}
+        onEmployeeActionCompleted={(actionInfo) => {
+          if (actionInfo.type === 'delete') {
+            handleAdminEmployeeHardDeleted(actionInfo.emp_no);
+          }
+
+        }}
       />
       {employeeToEdit && (
         <AdminEmployeeEditModal

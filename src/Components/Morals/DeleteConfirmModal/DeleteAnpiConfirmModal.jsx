@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './DeleteConfirmModal.module.css'; 
 import { FiX, FiAlertTriangle } from 'react-icons/fi'; 
 
-function DeleteConfirmModal({ isOpen, onClose, onConfirm }) {
+function DeleteAnpiConfirmModal({ isOpen, onClose, onConfirm }) {
   if (!isOpen) {
     return null;
   }
@@ -20,7 +20,7 @@ function DeleteConfirmModal({ isOpen, onClose, onConfirm }) {
 
         <h2 className={styles.title}>削除の確認</h2> 
         <p className={styles.message}>
-        社員の情報を削除します。<br/>この操作は取り消せません。<br/> 本当に削除してもよろしいですか？
+        すべての社員の安否情報を削除します。<br/>この操作は取り消せません。<br/> 本当に削除してもよろしいですか？
         </p>
 
         <div className={styles.buttonGroup}>
@@ -38,4 +38,4 @@ function DeleteConfirmModal({ isOpen, onClose, onConfirm }) {
   );
 }
 
-export default DeleteConfirmModal;
+export default DeleteAnpiConfirmModal;

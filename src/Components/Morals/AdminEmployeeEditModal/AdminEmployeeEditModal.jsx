@@ -1,18 +1,17 @@
-// src/Components/Morals/AdminEmployeeEditModal/AdminEmployeeEditModal.jsx
+
 import React, { useState, useEffect } from 'react';
 import styles from './AdminEmployeeEditModal.module.css'; // Tạo file CSS này
 import { FiX, FiEye, FiEyeOff } from 'react-icons/fi';
 
-// Component này cần danh sách phòng ban (departments) và danh sách nhân viên (allEmployees)
-// để tạo dropdown cho dpt_no và mgr_no
+
 function AdminEmployeeEditModal({
   isOpen,
   onClose,
-  onSave, // Hàm để lưu thay đổi
-  employeeData, // Dữ liệu ban đầu của nhân viên đang sửa (key chữ HOA)
-  departments, // Mảng các object phòng ban: [{ dpt_no, dpname }, ...]
-  allEmployees, // Mảng tất cả nhân viên: [{ emp_no, ename }, ...]
-  currentUser // Thông tin admin hiện tại (nếu cần cho API)
+  onSave, 
+  employeeData, 
+  departments,
+  allEmployees, 
+  currentUser 
 }) {
   const [formData, setFormData] = useState({
     ename: '',
@@ -28,19 +27,19 @@ function AdminEmployeeEditModal({
 
   useEffect(() => {
     if (isOpen && employeeData) {
-console.log('AdminEditModal - employeeData received:', JSON.stringify(employeeData, null, 2)); // Log employeeData
+console.log('AdminEditModal - employeeData received:', JSON.stringify(employeeData, null, 2)); 
 
       setFormData({
-        emp_no: employeeData.emp_no || '', // Giữ lại emp_no, không cho sửa
+        emp_no: employeeData.emp_no || '', 
         ename: employeeData.ename || '',
         dpt_no: employeeData.dpt_no || '',
         mgr_no: employeeData.mgr_no || '',
         tel: employeeData.tel || '',
-        password: '', // Không hiển thị mật khẩu cũ, chỉ cho nhập mới nếu muốn đổi
-        position: employeeData.position || '一般', // Mặc định '一般'
+        password: '', 
+        position: employeeData.position || '一般', 
       });
-      setShowpassword(false); // Reset trạng thái ẩn/hiện mật khẩu
-      setApiError(''); // Reset lỗi API
+      setShowpassword(false); 
+      setApiError(''); 
     }
   }, [isOpen, employeeData]);
 
@@ -55,10 +54,10 @@ console.log('AdminEditModal - employeeData received:', JSON.stringify(employeeDa
     e.preventDefault();
     setApiError('');
 
-    // Tạo payload, chỉ gửi mật khẩu nếu nó được nhập (có giá trị)
+    
     const payload = { ...formData };
     if (!payload.password) {
-      delete payload.password; // Không gửi trường password nếu rỗng
+      delete payload.password; 
     }
 
     console.log("Admin submitting employee update:", payload);
@@ -71,12 +70,12 @@ console.log('AdminEditModal - employeeData received:', JSON.stringify(employeeDa
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
-      // Log chi tiết response
+     
   console.log('AdminEditModal - Response status:', response.status);
-  const responseText = await response.text(); // Lấy text trước để tránh lỗi parse JSON nếu response không phải JSON
+  const responseText = await response.text(); 
   console.log('AdminEditModal - Response text:', responseText);
 
-  const result = JSON.parse(responseText); // Thử parse JSON
+  const result = JSON.parse(responseText);
   console.log('AdminEditModal - Parsed API Result:', result);
 
   if (!response.ok || result.error) {
@@ -93,7 +92,7 @@ console.log('AdminEditModal - employeeData received:', JSON.stringify(employeeDa
 
   if (!isOpen) return null;
 
-  // Lọc ra nhân viên hiện tại khỏi danh sách người quản lý tiềm năng
+  // Lọc  nhân viên hiện tại 
   const potentialManagers = allEmployees.filter(emp => String(emp.emp_no) !== String(formData.emp_no));
 
   return (
@@ -103,7 +102,7 @@ console.log('AdminEditModal - employeeData received:', JSON.stringify(employeeDa
         <h2 className={styles.title}>社員情報の編集 (管理者)</h2>
         {apiError && <p className={styles.errorMessage}>{apiError}</p>}
         <form onSubmit={handleSubmit} className={styles.form}>
-          {/* Mã Nhân Viên (chỉ hiển thị, không sửa) */}
+          {/* Mã Nhân Viên */}
           <div className={styles.inputGroup}>
             <label htmlFor="adminEdit-empNo" className={styles.label}>社員番号</label>
             <input type="text" id="adminEdit-empNo" name="emp_no" value={formData.emp_no} className={styles.input} readOnly disabled />
@@ -121,8 +120,8 @@ console.log('AdminEditModal - employeeData received:', JSON.stringify(employeeDa
             <select id="adminEdit-dptNo" name="dpt_no" value={formData.dpt_no} onChange={handleChange} className={styles.select} required>
               <option value="">部署を選択</option>
               {departments && departments.map(dept => (
-                // Giả sử departments là [{ dpt_no, dpname }, ...]
-                // Nếu API trả về khác, cần điều chỉnh
+                // departments là  dpt_no, dpname ,
+                
                 dept.dpt_no !== 'all' && <option key={dept.dpt_no} value={dept.dpt_no}>{dept.dpname}</option>
               ))}
             </select>
@@ -134,7 +133,7 @@ console.log('AdminEditModal - employeeData received:', JSON.stringify(employeeDa
             <select id="adminEdit-mgrNo" name="mgr_no" value={formData.mgr_no} onChange={handleChange} className={styles.select} required>
               <option value="">上司を選択</option>
               {potentialManagers && potentialManagers.map(emp => (
-                 // Giả sử allEmployees là [{ emp_no, ename }, ...]
+                 // allEmployees là  emp_no, ename
                 <option key={emp.emp_no} value={emp.emp_no}>{emp.ename} (ID: {emp.emp_no})</option>
               ))}
             </select>
@@ -152,7 +151,7 @@ console.log('AdminEditModal - employeeData received:', JSON.stringify(employeeDa
             <input type="tel" id="adminEdit-tel" name="tel" value={formData.tel} onChange={handleChange} className={styles.input} required />
           </div>
 
-          {/* Mật khẩu (chỉ nhập mới nếu muốn thay đổi) */}
+          {/* Mật khẩu */}
           <div className={styles.inputGroup}>
             <label htmlFor="adminEdit-password" className={styles.label}>新しいパスワード (変更する場合のみ)</label>
             <div className={styles.passwordWrapper}>
