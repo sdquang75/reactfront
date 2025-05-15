@@ -123,10 +123,10 @@
 
 .errorMessage {
  
-    color: red; /* Màu chữ đỏ đậm */
+    color: red;
   
-    padding: 0.75rem 1.25rem; /* Padding */
-    margin-bottom: 1rem; /* Khoảng cách với phần tử dưới */
+    padding: 0.75rem 1.25rem; 
+    margin-bottom: 1rem; 
     border-radius: 0.25rem; 
     font-size: 0.9rem;
     text-align: center;

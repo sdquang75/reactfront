@@ -32,14 +32,14 @@ function LoginPage({ onLoginSuccess }) {
       const responseData = await response.json();
 
       if (!response.ok) {
-       
+
         if (response.status === 401) {
-          setError('社員番号またはパスワードが正しくありません。'); 
+          setError('社員番号またはパスワードが正しくありません。');
         } else {
           setError(responseData.error || `エラーが発生しました: ${response.status}`);
         }
-        setIsLoading(false); 
-        return; 
+        setIsLoading(false);
+        return;
       }
 
       // responseData is { emp_no: "...", ename: "...", DPT_NO: "...", role: "..." }
@@ -72,11 +72,11 @@ function LoginPage({ onLoginSuccess }) {
 
     } catch (err) {
       console.error('Login request failed:', err);
-     
+
       if (err instanceof TypeError && err.message === "Failed to fetch") {
-         setError('サーバーへの接続に失敗しました。ネットワークを確認してください。'); 
-      } else if (!error) { 
-         setError(err.message || 'ログイン中に不明なエラーが発生しました。'); 
+        setError('サーバーへの接続に失敗しました。ネットワークを確認してください。');
+      } else if (!error) {
+        setError(err.message || 'ログイン中に不明なエラーが発生しました。');
       }
     } finally {
       setIsLoading(false);
@@ -92,7 +92,7 @@ function LoginPage({ onLoginSuccess }) {
           <p className={styles.subtitle}> 社員番号とパスワードを入力してください </p>
 
           <form onSubmit={handleSubmit} className={styles.form}>
-           
+
             <div className={styles.inputGroup}>
               <label htmlFor="employeeId" className={styles.label}>
                 社員番号
@@ -113,7 +113,7 @@ function LoginPage({ onLoginSuccess }) {
               <label htmlFor="password" className={styles.label}>
                 パスワード
               </label>
-              <div className={styles.passwordWrapper}> 
+              <div className={styles.passwordWrapper}>
                 <input
                   type={showPassword ? 'password' : 'text'}
                   id="password"
@@ -139,7 +139,7 @@ function LoginPage({ onLoginSuccess }) {
             <button type="submit" className={styles.button} disabled={isLoading}>
               {isLoading ? 'ログイン中...' : 'ログイン'}
             </button>
-             {error && <p className={styles.errorMessage}>{error}</p>} 
+            {error && <p className={styles.errorMessage}>{error}</p>}
           </form>
         </div>
       </main>

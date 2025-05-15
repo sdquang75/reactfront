@@ -26,7 +26,7 @@ function AdminEmployeeListItem({ employee, onViewDetails }) {
 
         {/* ///////////////////////////////////////////// */}
       {/* Thay thế StatusBadge bằng hiển thị Department */}
-      <span className={`${styles.cell} ${styles.department}`}>{employee.department || 'N/A'}</span>
+      <span className={`${styles.cell} ${styles.department}`}>{employee.dpname || 'N/A'}</span>
       <span className={`${styles.cell} ${styles.details}`}>
       <button onClick={handleDetailButtonClick} className={styles.detailsButton}>
           <FiInfo />

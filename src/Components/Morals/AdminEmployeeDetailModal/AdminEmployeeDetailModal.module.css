@@ -1,0 +1,181 @@
+/* src/Components/Morals/AdminEmployeeDetailModal/AdminEmployeeDetailModal.module.css */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  /* Nên cao hơn các modal khác nếu có thể mở chồng */
+  padding: 1rem;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+.modalBox {
+  background: #F9FAFB;
+  /* Giống EmployeeDetailModal */
+  padding: 1.5rem;
+  /* Giống EmployeeDetailModal */
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+  max-width: 400px;
+  /* Giống EmployeeDetailModal */
+  width: 95%;
+  position: relative;
+  text-align: left;
+  /* Căn trái nội dung chung */
+  box-sizing: border-box;
+  animation: fadeIn 0.2s ease-out;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.closeButtonTop {
+  /* Đổi tên từ closeButton để không trùng với EmployeeDetailModal nếu CSS bị gộp */
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #6c757d;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0.2rem;
+  display: flex;
+}
+
+.closeButtonTop:hover {
+  color: #333;
+}
+
+/* Phần header của modal (Tên nhân viên và nút Edit) */
+.employeeHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid #eee;
+}
+
+.employeeNameHeader {
+  /* Đổi tên từ modalTitle để dễ phân biệt */
+  font-size: 1.2rem;
+  /* Tên nhân viên to hơn */
+  font-weight: 600;
+  color: #000000;
+  text-align: left;
+
+
+padding: 2rem 0.25rem 1rem 0rem;
+
+}
+
+.editButtonModal {
+  /* Nút edit riêng cho modal admin */
+  background: none;
+  border: none;
+  padding: 2rem 0.25rem 1rem 0rem;
+  color: #6c757d;
+  font-size: 1.2rem;
+  /* Giống EmployeeDetailModal */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.editButtonModal:hover {
+  color: #343a40;
+}
+
+/* Container cho các dòng chi tiết */
+.detailsContainer {
+  margin-top: 1rem;
+  /* Thêm khoảng cách với header */
+}
+
+.detailItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 0;
+  /* Tăng padding cho dễ nhìn hơn */
+  border-bottom: 1px solid #e9ecef;
+  /* Đường kẻ mờ hơn */
+}
+
+.detailItem:last-child {
+  border-bottom: none;
+}
+
+.detailLabel {
+  font-size: 14px;
+  font-weight: 500;
+  /* Giống EmployeeDetailModal dataLabel */
+  color: #374151;
+  margin-right: 1rem;
+  white-space: nowrap;
+}
+
+.detailValue {
+  font-size: 14px;
+  font-weight: 400;
+  /* Cho giá trị thường */
+  color: #000000;
+  text-align: right;
+  word-break: break-word;
+}
+
+.detailValuePassword {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  word-break: break-all;
+}
+
+.passwordVisibilityToggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 8px;
+  color: #4B5563;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.passwordVisibilityToggle svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .modalBox {
+    max-width: 450px;
+    padding: 2rem;
+  }
+
+}

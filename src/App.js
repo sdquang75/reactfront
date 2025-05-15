@@ -80,7 +80,22 @@ function App() {
     // ログアウト後、ログインページへリダイレクトする。
   }, [navigate]);
 
+  const handleUserProfileUpdate = useCallback((updatedUserDataFromApi) => {
+    console.log('App.js: User profile updated, API returned:', updatedUserDataFromApi);
 
+
+
+    const updatedUser = {
+      ...currentUser, // Giữ lại các thông tin cũ không thay đổi 
+      ...updatedUserDataFromApi,
+      name: updatedUserDataFromApi.ename || updatedUserDataFromApi.name
+    };
+
+    setCurrentUser(updatedUser);
+    localStorage.setItem('user', JSON.stringify(updatedUser));
+
+
+  }, [currentUser, setCurrentUser]);
 
 
 
@@ -117,18 +132,18 @@ function App() {
 
 
 
-<Route
-    path="/safetylist"
-    element={
-        <ProtectedRoute currentUser={currentUser} allowedRoles={['user', 'admin']}>
-           
-            {currentUser && <EmployeeSafetyList dpt_no={currentUser.dpt_no} currentUser={currentUser}  />}
-        </ProtectedRoute>
-    }
-/>
+        <Route
+          path="/safetylist"
+          element={
+            <ProtectedRoute currentUser={currentUser} allowedRoles={['user', 'admin']}>
+
+              {currentUser && <EmployeeSafetyList dpt_no={currentUser.dpt_no} currentUser={currentUser} />}
+            </ProtectedRoute>
+          }
+        />
 
 
-{/* Admin */}
+        {/* Admin */}
         <Route
           path="/admin"
           element={
@@ -141,7 +156,7 @@ function App() {
           path="/employees"
           element={
             <ProtectedRoute currentUser={currentUser} allowedRoles={['admin']}>
-              <AdminEmployeeListPage />
+              <AdminEmployeeListPage currentUser={currentUser} onCurrentUserProfileUpdate={handleUserProfileUpdate} />
             </ProtectedRoute>
           }
         />
