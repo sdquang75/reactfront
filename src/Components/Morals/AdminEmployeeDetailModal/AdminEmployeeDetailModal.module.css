@@ -33,6 +33,19 @@
   animation: fadeIn 0.2s ease-out;
   max-height: 90vh;
   overflow-y: auto;
+  overflow-y: auto;
+  /* Cho phép cuộn nếu nội dung dài */
+  animation: fadeIn 0.2s ease-out;
+  /* Ẩn thanh cuộn cho Firefox */
+  scrollbar-width: none;
+
+  /* Ẩn thanh cuộn cho IE và Edge (legacy) */
+  -ms-overflow-style: none;
+}
+
+.modalBox::-webkit-scrollbar {
+  display: none;
+  /* Hoặc width: 0; height: 0; */
 }
 
 @keyframes fadeIn {
@@ -85,7 +98,7 @@
   text-align: left;
 
 
-padding: 2rem 0.25rem 1rem 0rem;
+  padding: 2rem 0.25rem 1rem 0rem;
 
 }
 

@@ -1,65 +1,111 @@
 /* src/Components/Morals/AdminEmployeeEditModal/AdminEmployeeEditModal.module.css */
 .overlay {
-  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.65); /* Đậm hơn chút */
-  display: flex; justify-content: center; align-items: center;
-  z-index: 1020; /* Cao hơn AdminDetailModal */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.65);
+  /* Đậm hơn chút */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1020;
+  /* Cao hơn AdminDetailModal */
   padding: 1rem;
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
 }
 
 .modalBox {
-  /* background: #F9FAFB; */ /* Giống spec bạn đưa */
-  background: #FFFFFF; /* Nền trắng cho form edit */
-  /* width: 366px; */ /* Theo spec */
-  /* height: auto; */ /* Chiều cao tự động theo nội dung, max-height ở dưới */
-  /* left: 13px; */ /* Các thuộc tính left, top này sẽ bị override bởi flexbox của overlay */
+  /* background: #F9FAFB; */
+  /* Giống spec bạn đưa */
+  background: #FFFFFF;
+  /* Nền trắng cho form edit */
+  /* width: 366px; */
+  /* Theo spec */
+  /* height: auto; */
+  /* Chiều cao tự động theo nội dung, max-height ở dưới */
+  /* left: 13px; */
+  /* Các thuộc tính left, top này sẽ bị override bởi flexbox của overlay */
   /* top: 93px; */
-  max-width: 420px; /* Giới hạn chiều rộng */
+  max-width: 420px;
+  /* Giới hạn chiều rộng */
   width: 95%;
-  padding: 20px 25px; /* Thêm padding */
+  padding: 20px 25px;
+  /* Thêm padding */
   border-radius: 10px;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25); /* Tăng nhẹ shadow */
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+  /* Tăng nhẹ shadow */
   position: relative;
-  text-align: left; /* Nội dung trong modal căn trái */
+  text-align: left;
+  /* Nội dung trong modal căn trái */
   max-height: 90vh;
-  overflow-y: auto; /* Cho phép cuộn nếu nội dung dài */
+  overflow-y: auto;
+  /* Cho phép cuộn nếu nội dung dài */
   animation: fadeIn 0.2s ease-out;
+  /* Ẩn thanh cuộn cho Firefox */
+  scrollbar-width: none;
+
+  /* Ẩn thanh cuộn cho IE và Edge (legacy) */
+  -ms-overflow-style: none;
+}
+
+.modalBox::-webkit-scrollbar {
+  display: none;
+  /* Hoặc width: 0; height: 0; */
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .closeButton {
   position: absolute;
-  top: 10px; right: 15px;
-  background: none; border: none;
-  font-size: 1.6rem; /* Icon X to hơn */
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  /* Icon X to hơn */
   color: #4B5563;
   cursor: pointer;
   line-height: 1;
   padding: 0.2rem;
 }
-.closeButton:hover { color: #111827; }
+
+.closeButton:hover {
+  color: #111827;
+}
 
 .title {
   /* font-family: 'Inter'; */
   font-weight: 600;
-  font-size: 22px; /* Giống spec: 社員情報編集 */
-  line-height: 1.2; /* 30px / 25px */
+  font-size: 22px;
+  /* Giống spec: 社員情報編集 */
+  line-height: 1.2;
+  /* 30px / 25px */
   text-align: center;
   color: #000000;
-  margin-bottom: 8px; /* Khoảng cách với subtitle */
+  margin-bottom: 8px;
+  /* Khoảng cách với subtitle */
 }
 
-.instructions { /* Tương ứng "新入社員の情報を入力してください" */
+.instructions {
+  /* Tương ứng "新入社員の情報を入力してください" */
   /* font-family: 'Inter'; */
   font-weight: 500;
   font-size: 14px;
-  line-height: 1.2; /* 17px / 14px */
+  line-height: 1.2;
+  /* 17px / 14px */
   text-align: center;
   color: #4B5563;
   margin-bottom: 25px;
@@ -68,7 +114,8 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 18px; /* Khoảng cách giữa các input group */
+  gap: 18px;
+  /* Khoảng cách giữa các input group */
 }
 
 .inputGroup {
@@ -78,29 +125,40 @@
 
 .label {
   /* font-family: 'Inter'; */
-  font-weight: 400; /* Giống spec */
+  font-weight: 400;
+  /* Giống spec */
   font-size: 14px;
-  line-height: 1.2; /* 17px / 14px */
+  line-height: 1.2;
+  /* 17px / 14px */
   color: #000000;
-  margin-bottom: 6px; /* Khoảng cách từ label đến input */
+  margin-bottom: 6px;
+  /* Khoảng cách từ label đến input */
 }
 
-.input, .select {
+.input,
+.select {
   box-sizing: border-box;
-  width: 100%; /* Chiều rộng 320px sẽ do .modalBox giới hạn */
-  height: 39.67px; /* Giống spec */
+  width: 100%;
+  /* Chiều rộng 320px sẽ do .modalBox giới hạn */
+  height: 39.67px;
+  /* Giống spec */
   border: 1px solid #D1D5DB;
   border-radius: 6px;
-  padding: 0 12px; /* Thêm padding ngang */
+  padding: 0 12px;
+  /* Thêm padding ngang */
   font-size: 14px;
   font-family: 'Inter', sans-serif;
   color: #000000;
 }
-.input:focus, .select:focus {
+
+.input:focus,
+.select:focus {
   outline: none;
-  border-color: #3B82F6; /* Màu khi focus */
+  border-color: #3B82F6;
+  /* Màu khi focus */
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
 }
+
 .input[disabled] {
   background-color: #E5E7EB;
   cursor: not-allowed;
@@ -112,16 +170,20 @@
   display: flex;
   align-items: center;
 }
-.passwordWrapper .input { /* Mật khẩu input chiếm hết trừ nút toggle */
+
+.passwordWrapper .input {
+  /* Mật khẩu input chiếm hết trừ nút toggle */
   padding-right: 40px;
 }
 
 .passwordToggle {
   position: absolute;
-  right: 1px; /* Đặt nút bên trong input field */
+  right: 1px;
+  /* Đặt nút bên trong input field */
   top: 1px;
   bottom: 1px;
-  width: 38px; /* Chiều rộng nút */
+  width: 38px;
+  /* Chiều rộng nút */
   background: transparent;
   border: none;
   display: flex;
@@ -130,40 +192,50 @@
   cursor: pointer;
   color: #6B7280;
 }
+
 .passwordToggle:hover {
   color: #374151;
 }
+
 .passwordToggle svg {
   width: 18px;
   height: 18px;
 }
 
 .buttonGroup {
-  margin-top: 25px; /* Khoảng cách với field cuối */
+  margin-top: 25px;
+  /* Khoảng cách với field cuối */
   display: flex;
-  flex-direction: column; /* Các nút xếp chồng lên nhau */
+  flex-direction: column;
+  /* Các nút xếp chồng lên nhau */
   gap: 10px;
 }
 
 .saveButton {
-  /* background: #18181B; */ /* Giống spec "変更を保存" */
-  background: #2563EB; /* Hoặc màu xanh dương chủ đạo */
+  /* background: #18181B; */
+  /* Giống spec "変更を保存" */
+  background: #2563EB;
+  /* Hoặc màu xanh dương chủ đạo */
   color: #FFFFFF;
-  width: 100%; /* 320px theo spec sẽ do .modalBox xử lý */
+  width: 100%;
+  /* 320px theo spec sẽ do .modalBox xử lý */
   height: 39.67px;
   border: none;
   border-radius: 6px;
   font-family: 'Inter', sans-serif;
   font-weight: 500;
   font-size: 14px;
-  line-height: 1; /* Căn giữa text theo chiều dọc */
+  line-height: 1;
+  /* Căn giữa text theo chiều dọc */
   cursor: pointer;
   transition: background-color 0.2s;
 }
+
 .saveButton:hover {
   /* background: #374151; */
   background: #1D4ED8;
 }
+
 .saveButton:disabled {
   background-color: #9CA3AF;
   cursor: not-allowed;
@@ -179,12 +251,14 @@
 
 /* CSS cho select dropdown arrow (nếu cần tùy chỉnh) */
 .select {
-  appearance: none; /* Xóa mũi tên mặc định */
+  appearance: none;
+  /* Xóa mũi tên mặc định */
   -webkit-appearance: none;
   -moz-appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 0.7rem center;
   background-size: 1.2em 1.2em;
-  padding-right: 2.5rem; /* Đảm bảo text không đè lên mũi tên */
+  padding-right: 2.5rem;
+  /* Đảm bảo text không đè lên mũi tên */
 }
