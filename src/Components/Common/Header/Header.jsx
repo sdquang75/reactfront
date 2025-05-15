@@ -1,11 +1,14 @@
 import React from 'react';
 import styles from './Header.module.css';
-
+import { useNavigate } from 'react-router-dom';
 function Header({ title = "安否確認システム", currentUser, onLogout }) {
+
+  const navigate = useNavigate();
+  const gotoHomepage  =  () => navigate('/');
   return (
     <header className={styles.header}>
 
-      <h1 className={styles.headerTitle} >{title}</h1>
+      <h1 className={styles.headerTitle } onClick={gotoHomepage} >{title}</h1>
 
 
       {currentUser && (
